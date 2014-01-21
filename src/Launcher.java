@@ -1,4 +1,6 @@
-
+/**
+ * C'est le launcher.
+ */
 public class Launcher {
 	
 	
