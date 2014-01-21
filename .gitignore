@@ -2,3 +2,5 @@
 *.class
 *.bak
 /bin
+.classpath
+.project
