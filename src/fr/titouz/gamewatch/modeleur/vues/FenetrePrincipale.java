@@ -1,6 +1,8 @@
 package fr.titouz.gamewatch.modeleur.vues;
 
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 /**
@@ -17,10 +19,10 @@ public class FenetrePrincipale extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
+		JPanel pan = new JPanel(new BorderLayout());
 		JTabbedPane tab = new JTabbedPane(JTabbedPane.LEFT);
-		tab.addTab("ghjgh", null);
-		tab.addTab("ghjgh", null);
-		tab.addTab("ghjgh", null);
+		tab.addTab("ghjgh", pan);
 		this.setContentPane(tab);
+		
 	}
 }
