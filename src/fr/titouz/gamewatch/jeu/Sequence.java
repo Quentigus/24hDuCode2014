@@ -1,4 +1,4 @@
-/*Copyright or Â© or Copr. ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -14,15 +14,8 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+package fr.titouz.gamewatch.jeu;
 
-
-package fr.titouz.gamewatch.echange;
-
-public class Obstacle {
-
-	/**
-	 * @param args
-	 */
-
+public class Sequence {
 
 }

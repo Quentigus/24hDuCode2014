@@ -1,4 +1,4 @@
-/*Copyright or Â© or Copr. ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -14,16 +14,9 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.titouz.gamewatch.echange;
+package fr.titouz.gamewatch.jeu;
 
-public class ElementFixe {
-
-	/**
-	 * @param args
-	 */
+public class Etat {
 	
-	int longueur;
-	int largeur;
-	int position;
 
 }
