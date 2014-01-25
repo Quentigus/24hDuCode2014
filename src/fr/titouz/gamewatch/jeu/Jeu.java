@@ -28,6 +28,7 @@ public class Jeu {
 	private ContextJeu context;
 	private boolean continuer;
 	private Thread threadJeu;
+	private List<TourDeJeuListener> ecouteurs;
 	
 	/**
 	 * Crée un jeu.
@@ -35,6 +36,7 @@ public class Jeu {
 	public Jeu() {
 		context = new ContextJeu();
 		sequences = new LinkedList<Sequence>();
+		ecouteurs = new LinkedList<TourDeJeuListener>();
 		threadJeu = createThreadJeu();
 	}
 
@@ -44,6 +46,24 @@ public class Jeu {
 
 	public ContextJeu getContext() {
 		return context;
+	}
+	
+	/**
+	 * Ajoute un écouteur de tour de jeu.
+	 * 
+	 * @param l l'écouteur de tour de jeu.
+	 */
+	public void addTourDeJeuListener(TourDeJeuListener l) {
+		ecouteurs.add(l);
+	}
+	
+	/**
+	 * Retire un écouteur de tour de jeu.
+	 * 
+	 * @param l l'écouteur à retirer.
+	 */
+	public void removeTourDeJeuListener(TourDeJeuListener l) {
+		ecouteurs.remove(l);
 	}
 	
 	/**
@@ -81,6 +101,9 @@ public class Jeu {
 				lastTime = new Date().getTime();
 				//tour
 				jouerUnTour();
+				for(TourDeJeuListener listener : ecouteurs) {
+					listener.notifier();
+				}
 				
 				currentTime = new Date().getTime();
 			try {
