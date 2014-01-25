@@ -1,9 +1,15 @@
 package fr.titouz.gamewatch.emulateur.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
+
+import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
+import fr.titouz.gamewatch.emulateur.view.common.LeftBarPanel;
+import fr.titouz.gamewatch.emulateur.view.common.RightBarPanel;
+import fr.titouz.gamewatch.emulateur.view.game.GamePanel;
 
 public class MainPanel extends JPanel{
 
@@ -23,6 +29,13 @@ public class MainPanel extends JPanel{
 	public MainPanel init() {
 		this.setBackground(new Color(227, 227, 227));
 		this.setMinimumSize(new Dimension(1000,500));
+		
+		
+		this.setLayout(new BorderLayout(5, 5));
+		this.add(RightBarPanel.getInstance().init(),BorderLayout.WEST);
+		this.add(CenterPanel.getInstance().init(),BorderLayout.CENTER);
+		this.add(LeftBarPanel.getInstance().init(), BorderLayout.EAST);
+		
 		return this;
 	}
 }
