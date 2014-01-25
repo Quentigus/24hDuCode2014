@@ -22,7 +22,7 @@ public class EmulateurTitleLabel extends JLabel{
 	}
 	
 	public EmulateurTitleLabel init() {
-		this.setPreferredSize(new Dimension(150,100));
+		this.setPreferredSize(new Dimension(100,100));
 		this.setOpaque(false);
 		this.setText(this.title);
 		this.setBorder(BorderFactory.createLineBorder(Color.black));

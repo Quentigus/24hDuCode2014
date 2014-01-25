@@ -21,7 +21,7 @@ public class LeftBarPanel extends JPanel{
 	
 	public LeftBarPanel init() {
 		this.setOpaque(false);
-		this.setPreferredSize(new Dimension(200,500));
+		this.setPreferredSize(new Dimension(100,700));
 		this.setLayout(new BorderLayout());
 		this.add(RedButtonPanel.getInstance().init(), BorderLayout.SOUTH);
 		return this;

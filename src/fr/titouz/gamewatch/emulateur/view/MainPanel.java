@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.common.LeftBarPanel;
@@ -28,8 +29,8 @@ public class MainPanel extends JPanel{
 	
 	public MainPanel init() {
 		this.setBackground(new Color(227, 227, 227));
-		this.setMinimumSize(new Dimension(1000,500));
-		
+		this.setMinimumSize(new Dimension(800,700));
+		this.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		this.setLayout(new BorderLayout(5, 5));
 		this.add(RightBarPanel.getInstance().init(),BorderLayout.WEST);

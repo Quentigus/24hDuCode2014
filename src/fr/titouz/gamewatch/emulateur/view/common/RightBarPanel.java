@@ -22,7 +22,7 @@ public class RightBarPanel extends JPanel{
 	
 	public RightBarPanel init() {
 		this.setOpaque(false);
-		this.setPreferredSize(new Dimension(200,500));
+		this.setPreferredSize(new Dimension(100,700));
 		this.setLayout(new BorderLayout());
 		this.add(EmulateurTitleLabel.getInstance().init(),BorderLayout.NORTH);
 		this.add(RedButtonPanel.getInstance().init(), BorderLayout.SOUTH);
