@@ -1,4 +1,4 @@
-/*Copyright or Â© or Copr. ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -28,8 +28,9 @@ public class Ennemi {
 	 int trajet;
 	 
 	 
-	 int seDeplacer(int position){
+	 int bouger(int position){
 		 
+		 return position;
 	 }
 
 	 void tuer(){

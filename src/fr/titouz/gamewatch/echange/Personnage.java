@@ -1,4 +1,4 @@
-/*Copyright or Â© or Copr. ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -27,18 +27,16 @@ public class Personnage {
 	double vitesse;
 	double trajet;
 	int position;
+	int etat; // 1 en vie / 0 mort
 	
-	int seDeplacer (int position){
+	int seDeplacer(int position){
 		
+		return position;
 	}
 	
 	void mourrir(){
 		
-	}
-
-	void eviterObstacle(){
-		
-	}
+	}	
 	
 	void accelerer(){
 		

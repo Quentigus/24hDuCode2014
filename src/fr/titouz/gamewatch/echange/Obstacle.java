@@ -1,4 +1,4 @@
-/*Copyright or Â© or Copr. ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -15,7 +15,6 @@
  */
 
 
-
 package fr.titouz.gamewatch.echange;
 
 public class Obstacle {
@@ -23,6 +22,16 @@ public class Obstacle {
 	/**
 	 * @param args
 	 */
+	
+	int largeur;
+	int longueur;
+	int position;
+	double vitesse;
+	int trajet;
+	
+	int bouger(int position){
+		return position;
+	}
 
 
 }

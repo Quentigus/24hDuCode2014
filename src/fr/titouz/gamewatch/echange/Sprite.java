@@ -1,4 +1,4 @@
-/*Copyright or Â© or Copr. ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -17,11 +17,14 @@
 
 package fr.titouz.gamewatch.echange;
 
-public abstract class Sprite {
+import java.awt.Image;
+
+public class Sprite {
 
 	/**
 	 * @param args
 	 */
 
-
+	int largeur;
+	Image image;
 }
