@@ -1,5 +1,7 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -21,6 +23,10 @@ public class PanelSlider extends JPanel {
 		this.label = new JLabel(pLabel);
 				
 		this.slider = new JSlider(pMin, pMax, pValeur);
+		
+		this.setLayout(new GridLayout(2, 1));
+		this.add(this.label);
+		this.add(this.slider);
 	}
 
 	public int getValue() {
