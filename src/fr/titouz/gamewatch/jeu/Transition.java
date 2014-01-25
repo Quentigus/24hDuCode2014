@@ -25,9 +25,16 @@ import java.util.List;
 public abstract class Transition {
 
 	protected Etat etatEntree;
-	protected List<Etat> etatSortie = new LinkedList<Etat>();
+	protected List<Etat> etatSortie;
 	protected ContextJeu contextDuJeu;
 	protected Sequence sequence;
+	
+	public Transition(ContextJeu context, Sequence s, Etat entree) {
+		contextDuJeu = context;
+		sequence = s;
+		etatSortie = new LinkedList<Etat>();
+		etatEntree = entree;
+	}
 	
 	public Etat getEtatEntree() {
 		return etatEntree;
@@ -39,10 +46,6 @@ public abstract class Transition {
 
 	public List<Etat> getEtatSortie() {
 		return etatSortie;
-	}
-
-	public void setEtatSortie(List<Etat> etatSortie) {
-		this.etatSortie = etatSortie;
 	}
 
 	public Sequence getSequence() {
@@ -61,5 +64,8 @@ public abstract class Transition {
 		this.contextDuJeu = contextDuJeu;
 	}
 
-	abstract void suivant();
+	/**
+	 * Action effectuée par la transition à chaque tour.
+	 */
+	public abstract void suivant();
 }
