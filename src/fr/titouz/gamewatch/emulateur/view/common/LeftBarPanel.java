@@ -24,7 +24,7 @@ public class LeftBarPanel extends JPanel{
 			this.setOpaque(false);
 			this.setPreferredSize(new Dimension(100,500));
 			this.setLayout(new BorderLayout());
-			this.add(new ImagePanel("ressources/left-arrow.png"), BorderLayout.SOUTH);
+			this.add(new ImagePanel("ressources/flecheGauche.png"), BorderLayout.SOUTH);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
