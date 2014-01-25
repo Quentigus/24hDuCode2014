@@ -51,7 +51,8 @@ public class Sequence {
 	 * Active toutes les transitions des états courant.
 	 */
 	public void suivant() {
-		for(Etat e : etatsCourants) {
+		List<Etat> copie = new LinkedList<Etat>(etatsCourants);
+		for(Etat e : copie) {
 			for(Transition t : e) {
 				t.suivant();
 			}
