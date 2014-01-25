@@ -21,6 +21,8 @@ public class GamePanel extends JPanel{
 	
 	public GamePanel init() {
 		this.setMinimumSize(new Dimension(600,350));
+		this.setPreferredSize(new Dimension(600,350));
+		this.setMaximumSize(new Dimension(600,350));
 		this.setBackground(Color.black);
 		
 		

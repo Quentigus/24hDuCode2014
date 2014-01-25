@@ -19,7 +19,7 @@ public class MainFrame extends JFrame{
 	}
 	
 	public MainFrame init() {
-		this.setMinimumSize(new Dimension(1000, 500));
+		this.setMinimumSize(new Dimension(820, 720));
 		this.setContentPane(MainPanel.getInstance().init());
 		
 		this.pack();
