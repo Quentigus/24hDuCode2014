@@ -16,6 +16,46 @@
 
 package fr.titouz.gamewatch.jeu;
 
-public class Sequence {
+import java.util.LinkedList;
+import java.util.List;
 
+
+public class Sequence {
+	private Etat etatInitial;
+	private List<Etat> etatsCourants;
+	
+	/**
+	 * Crée une séquence.
+	 * 
+	 * @param init état initial de la séquence.
+	 */
+	public Sequence(Etat init) {
+		super();
+		etatsCourants = new LinkedList<Etat>();
+		etatInitial = init;
+	}
+
+	public Etat getEtatInitial() {
+		return etatInitial;
+	}
+
+	public void setEtatInitial(Etat etatInitial) {
+		this.etatInitial = etatInitial;
+	}
+	
+	public List<Etat> getEtatsCourants() {
+		return etatsCourants;
+	}
+	
+	/**
+	 * Active toutes les transitions des états courant.
+	 */
+	public void suivant() {
+		List<Etat> copie = new LinkedList<Etat>(etatsCourants);
+		for(Etat e : copie) {
+			for(Transition t : e) {
+				t.suivant();
+			}
+		}
+	}
 }

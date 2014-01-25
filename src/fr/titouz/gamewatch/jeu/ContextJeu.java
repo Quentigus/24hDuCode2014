@@ -16,6 +16,30 @@
 
 package fr.titouz.gamewatch.jeu;
 
-public class ContextJeu {
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Cette classe contient l'état des éléments généraux d'un jeu.
+ */
+public class ContextJeu {
+	private Map<String, Boolean> etatsTouches;
+	
+	public ContextJeu() {
+		etatsTouches = new HashMap<String, Boolean>();
+		initTouchMap();
+	}
+	
+	private void initTouchMap() {
+		etatsTouches.put("droite", false);
+		etatsTouches.put("gauche", false);
+	}
+
+	public Map<String, Boolean> getEtatsTouches() {
+		return etatsTouches;
+	}
+
+	public void setEtatsTouches(Map<String, Boolean> etatsTouches) {
+		this.etatsTouches = etatsTouches;
+	}
 }

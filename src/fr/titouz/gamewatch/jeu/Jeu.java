@@ -16,10 +16,38 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Cette classe représente un game & watch.
+ */
 public class Jeu {
-
+	private List<Sequence> sequences;
+	private ContextJeu context;
+	
 	/**
-	 * @param args
+	 * Crée un jeu.
 	 */
+	public Jeu() {
+		context = new ContextJeu();
+		sequences = new LinkedList<Sequence>();
+	}
 
+	public List<Sequence> getSequences() {
+		return sequences;
+	}
+
+	public ContextJeu getContext() {
+		return context;
+	}
+	
+	/**
+	 * Joue un tour (= une transition) du jeu.
+	 */
+	public void jouerUnTour() {
+		for(Sequence s: sequences) {
+			s.suivant();
+		}
+	}
 }

@@ -20,7 +20,7 @@ public class PanelSlider extends JPanel {
 	
 	public PanelSlider(String pLabel, int pMin, int pMax, int pValeur, ChangeListener pListener) {
 		this.listener = pListener;
-		this.label = new JLabel(pLabel);
+		this.label = new JLabel(pLabel + " :");
 				
 		this.slider = new JSlider(pMin, pMax, pValeur);
 		
