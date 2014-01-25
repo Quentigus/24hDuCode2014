@@ -33,6 +33,9 @@ public class ControlController {
 			MainController.getInstance().launchGame();
 			CenterPanel.getInstance().changerEcranToGame();
 		}
+		else {
+			CenterPanel.getInstance().changerEcranToGameOver();
+		}
 		
 	}
 	
