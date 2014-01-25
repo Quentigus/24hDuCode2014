@@ -19,12 +19,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
  * @author Bastien Andru <bastien.andru@gmail.com>
  */
 public class DecoupeurSprites extends JPanel {
+
+	private AfficheurImage aff;
+	private PanelSlider slide;
 
 	/**
 	 * Default constructor of
@@ -33,27 +38,39 @@ public class DecoupeurSprites extends JPanel {
 	public DecoupeurSprites() {
 
 		this.setLayout(new GridBagLayout());
-		this.setBackground(Color.red);
 		GridBagConstraints c = new GridBagConstraints();
 
 		c.gridx = 0;
 		c.gridy = 0;
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.fill = GridBagConstraints.NONE;
 		//c.anchor = GridBagConstraints.NORTHWEST;
-		AfficheurImage aff = new AfficheurImage();
+		aff = new AfficheurImage();
 		aff.changeImage("ressources/Sprite1.png");
 		this.add(aff, c);
 
-		System.out.println("hjkhk");
+		slide = new PanelSlider("Largeur du sprite", new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				MAJLargeurDecoupe();
+			}
+		});
 		
+		c.gridy = 1;
+		this.add(slide, c);
+
 		this.validate();
 
+	}
+
+	private void MAJLargeurDecoupe() {
+		aff.setLargSprite(slide.getValue());
 	}
 }
 
 class AfficheurImage extends JComponent {
 
 	private BufferedImage image = null;
+
 	private int largSprite = 25;
 
 	@Override
@@ -63,8 +80,8 @@ class AfficheurImage extends JComponent {
 		if (image != null) {
 			g2d.drawImage(image, null, 0, 0);
 		}
-		int offsetX = 0;
-		while(offsetX+largSprite < this.getWidth()){
+		int offsetX = 1;
+		while (offsetX + largSprite < this.getWidth()) {
 			offsetX += largSprite;
 			g2d.drawLine(offsetX, 0, offsetX, this.getHeight());
 		}
@@ -84,6 +101,4 @@ class AfficheurImage extends JComponent {
 		this.largSprite = largSprite;
 		this.repaint();
 	}
-	
-	
 }

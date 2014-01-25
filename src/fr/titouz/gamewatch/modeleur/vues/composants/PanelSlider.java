@@ -27,9 +27,14 @@ public class PanelSlider extends JPanel {
 		this.setLayout(new GridLayout(2, 1));
 		this.add(this.label);
 		this.add(this.slider);
+		this.slider.addChangeListener(listener);
 	}
 
 	public int getValue() {
 		return this.slider.getValue();
-	}	
+	}
+
+	public JSlider getSlider() {
+		return slider;
+	}
 }
