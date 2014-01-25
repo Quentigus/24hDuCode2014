@@ -1,12 +1,8 @@
 package fr.titouz.gamewatch.modeleur.vues;
 
-import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurFond;
-import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
 import javax.swing.JFrame;
 
 import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
-import fr.titouz.gamewatch.modeleur.vues.composants.fond.DecoupeurFond;
-import fr.titouz.gamewatch.modeleur.vues.composants.sprites.PositionnementSprite;
 
 public class FenetrePrincipale extends JFrame {
 
