@@ -16,6 +16,14 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public abstract class Transition {
 
+	Etat etatEntree;
+	List<Etat> etatSortie = new LinkedList<Etat>();
+	ContextJeu etatTouche;
+	
+	abstract void next();
 }
