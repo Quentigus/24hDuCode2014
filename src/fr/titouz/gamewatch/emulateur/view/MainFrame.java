@@ -22,6 +22,7 @@ public class MainFrame extends JFrame{
 		this.setMinimumSize(new Dimension(820, 720));
 		this.setContentPane(MainPanel.getInstance().init());
 		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
 		
