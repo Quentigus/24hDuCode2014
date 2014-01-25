@@ -1,6 +1,10 @@
 package fr.titouz.gamewatch.emulateur.controller;
 
+import java.util.List;
+
+import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
+import fr.titouz.gamewatch.tools.Repertoire;
 
 public class ControlController {
 
@@ -17,14 +21,18 @@ public class ControlController {
 	}
 	
 	public String[] getListGames() {
-		String[] list = {"Mario","Donkey Kong","Jongleur", "Saut d'eau"};
-		System.out.println(list);
-		return list;
+		List<String> list = Repertoire.getListeFichiers();
+		String[] games = new String[list.size()];
+		list.toArray(games);
+		
+		return games;
 	}
 
 	public void enterListControl(String selectedValue) {
-		System.out.println(selectedValue);
-		GameTitlePanel.getInstance().setGameOver();
+		if(selectedValue != null && !MainController.getInstance().isGameOn()) {
+			MainController.getInstance().launchGame();
+			CenterPanel.getInstance().changerEcranToGame();
+		}
 		
 	}
 	
