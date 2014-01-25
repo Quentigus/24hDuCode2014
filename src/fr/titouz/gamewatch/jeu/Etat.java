@@ -16,6 +16,7 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
@@ -23,7 +24,8 @@ import java.util.LinkedList;
 /**
  * Cette classe représente un état d'une séquence. 
  */
-public class Etat implements Iterable<Transition> {
+public class Etat implements Iterable<Transition>, Serializable {
+	private static final long serialVersionUID = -754985720427205694L;
 	private List<Transition> transitions;
 	private boolean actif;
 	

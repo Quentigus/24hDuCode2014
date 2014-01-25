@@ -16,11 +16,13 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class Sequence {
+public class Sequence implements Serializable {
+	private static final long serialVersionUID = 608080587374031553L;
 	private Etat etatInitial;
 	private List<Etat> etatsCourants;
 	
