@@ -3,11 +3,8 @@ package fr.titouz.gamewatch.modeleur.vues.composants;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -24,14 +21,11 @@ public class PanelChoixStripes extends JPanel {
 
 		ArrayList<BufferedImage> lesImages = new ArrayList<>();
 		try {
-			lesImages.add(ImageIO.read()));
+			lesImages.add(ImageIO.read(new URL("")));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
