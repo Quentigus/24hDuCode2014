@@ -14,17 +14,8 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+package fr.titouz.gamewatch.jeu;
 
-package fr.titouz.gamewatch.echange;
+public class Sequence {
 
-import java.awt.Image;
-
-public class Sprite {
-
-	/**
-	 * @param args
-	 */
-
-	int largeur;
-	Image image;
 }

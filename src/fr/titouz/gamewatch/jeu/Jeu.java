@@ -14,27 +14,12 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+package fr.titouz.gamewatch.jeu;
 
-package fr.titouz.gamewatch.echange;
-
-public class Ennemi {
+public class Jeu {
 
 	/**
 	 * @param args
 	 */
-	 int longeur;
-	 int largeur;
-	 int position;
-	 int trajet;
-	 
-	 
-	 int bouger(int position){
-		 
-		 return position;
-	 }
-
-	 void tuer(){
-		 
-	 }
 
 }

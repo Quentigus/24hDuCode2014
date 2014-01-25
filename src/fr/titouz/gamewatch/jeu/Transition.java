@@ -14,16 +14,8 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.titouz.gamewatch.echange;
+package fr.titouz.gamewatch.jeu;
 
-public class ElementFixe {
-
-	/**
-	 * @param args
-	 */
-	
-	int longueur;
-	int largeur;
-	int position;
+public abstract class Transition {
 
 }

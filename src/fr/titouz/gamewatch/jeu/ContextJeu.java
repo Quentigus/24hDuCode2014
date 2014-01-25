@@ -14,24 +14,8 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+package fr.titouz.gamewatch.jeu;
 
-package fr.titouz.gamewatch.echange;
-
-public class Obstacle {
-
-	/**
-	 * @param args
-	 */
-	
-	int largeur;
-	int longueur;
-	int position;
-	double vitesse;
-	int trajet;
-	
-	int bouger(int position){
-		return position;
-	}
-
+public class ContextJeu {
 
 }

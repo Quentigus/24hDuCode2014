@@ -14,12 +14,8 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.titouz.gamewatch.echange;
+package fr.titouz.gamewatch.jeu;
 
-public class Jeu {
-
-	/**
-	 * @param args
-	 */
+public class Etat {
 
 }
