@@ -17,5 +17,6 @@
 package fr.titouz.gamewatch.jeu;
 
 public class Etat {
+	
 
 }
