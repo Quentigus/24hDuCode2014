@@ -33,4 +33,31 @@ public class CenterPanel extends JPanel{
 		
 		return this;
 	}
+
+	public void changerEcranToGame() {
+		if(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.NORTH) instanceof GameTitlePanel) {
+			this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.NORTH));
+			this.add(GamePanel.getInstance().init(),BorderLayout.NORTH);
+			this.repaint();this.validate();
+		}
+		
+	}
+	
+	public void changerEcranToGameOver() {
+		if(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.NORTH) instanceof GamePanel) {
+			this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.NORTH));
+			this.add(GameTitlePanel.getInstance().init().setGameOver(),BorderLayout.NORTH);
+			this.repaint();this.validate();
+		}
+		
+	}
+	
+	public void changerEcranToHome() {
+		if(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.NORTH) instanceof GamePanel) {
+			this.remove(((BorderLayout)this.getLayout()).getLayoutComponent(BorderLayout.NORTH));
+			this.add(GameTitlePanel.getInstance().init().setHome(),BorderLayout.NORTH);
+			this.repaint();this.validate();
+		}
+		
+	}
 }

@@ -32,7 +32,7 @@ public class RightBarPanel extends JPanel{
 			this.setLayout(new BorderLayout());
 			this.add(EmulateurTitleLabel.getInstance().init(),BorderLayout.NORTH);
 
-			this.add(new ImagePanel("ressources/right-arrow.png"), BorderLayout.SOUTH);
+			this.add(new ImagePanel("ressources/flecheDroite.png"), BorderLayout.SOUTH);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
