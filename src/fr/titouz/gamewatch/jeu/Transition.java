@@ -19,11 +19,47 @@ package fr.titouz.gamewatch.jeu;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Cette classe représente une transition disponible entre des états du jeu.
+ */
 public abstract class Transition {
 
-	Etat etatEntree;
-	List<Etat> etatSortie = new LinkedList<Etat>();
-	ContextJeu etatTouche;
+	protected Etat etatEntree;
+	protected List<Etat> etatSortie = new LinkedList<Etat>();
+	protected ContextJeu contextDuJeu;
+	protected Sequence sequence;
 	
-	abstract void next();
+	public Etat getEtatEntree() {
+		return etatEntree;
+	}
+
+	public void setEtatEntree(Etat etatEntree) {
+		this.etatEntree = etatEntree;
+	}
+
+	public List<Etat> getEtatSortie() {
+		return etatSortie;
+	}
+
+	public void setEtatSortie(List<Etat> etatSortie) {
+		this.etatSortie = etatSortie;
+	}
+
+	public Sequence getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(Sequence sequence) {
+		this.sequence = sequence;
+	}
+
+	public ContextJeu getContextDuJeu() {
+		return contextDuJeu;
+	}
+
+	public void setContextDuJeu(ContextJeu contextDuJeu) {
+		this.contextDuJeu = contextDuJeu;
+	}
+
+	abstract void suivant();
 }
