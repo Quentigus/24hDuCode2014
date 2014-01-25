@@ -16,14 +16,16 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Cette classe représente une transition disponible entre des états du jeu.
  */
-public abstract class Transition {
+public abstract class Transition implements Serializable {
 
+	private static final long serialVersionUID = 7111721649440666679L;
 	protected Etat etatEntree;
 	protected List<Etat> etatSortie;
 	protected ContextJeu contextDuJeu;

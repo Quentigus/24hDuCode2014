@@ -26,6 +26,7 @@ import fr.titouz.gamewatch.jeu.Transition;
  */
 
 public class TransitionSimple extends Transition{
+	private static final long serialVersionUID = -8897353268886690699L;
 
 	public TransitionSimple(ContextJeu context, Sequence s, Etat entree) {
 		super(context, s, entree);

@@ -26,6 +26,8 @@ import fr.titouz.gamewatch.jeu.Transition;
  */
 public class TransitionToucheGauche extends Transition {
 	
+	private static final long serialVersionUID = -6547662984045438949L;
+
 	public TransitionToucheGauche(ContextJeu context, Sequence s, Etat entree) {
 		super(context, s, entree);
 	}
