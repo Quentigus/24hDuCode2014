@@ -27,13 +27,12 @@ public class RightBarPanel extends JPanel{
 	
 	public RightBarPanel init() {
 		try {
-			this.setOpaque(true);
-			this.setPreferredSize(new Dimension(110,700));
+			this.setOpaque(false);
+			this.setPreferredSize(new Dimension(110,500));
 			this.setLayout(new BorderLayout());
 			this.add(EmulateurTitleLabel.getInstance().init(),BorderLayout.NORTH);
 
 			this.add(new ImagePanel("ressources/right-arrow.png"), BorderLayout.SOUTH);
-			this.setBackground(Color.blue);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

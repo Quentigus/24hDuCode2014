@@ -24,7 +24,6 @@ public class ImagePanel extends JPanel{
 	public void paint(Graphics g) {
 		super.paintComponents(g);
 		try {
-			JLabel button = new JLabel(ImagesHelper.getIcon("resources/right-arrow.png"));
 			this.img = ImagesHelper.getImage(this.url);
 			if(this.img != null) {
 				g.drawImage(this.img,0,0,this);

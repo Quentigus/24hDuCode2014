@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel{
 
 	private static GamePanel instance;
+	private final String url_home = "ressources/screen_home.png";
+	private final String url_over = "ressources/game_over.png";
 
 	private GamePanel() {
 	}
