@@ -1,5 +1,6 @@
 package fr.titouz.gamewatch.modeleur.vues;
 
+import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,10 +20,10 @@ public class FenetrePrincipale extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		JPanel pan = new JPanel(new BorderLayout());
 		JTabbedPane tab = new JTabbedPane(JTabbedPane.LEFT);
-		tab.addTab("ghjgh", pan);
+		tab.addTab("ghjgh", new DecoupeurSprites());
 		this.setContentPane(tab);
 		
+		this.revalidate();
 	}
 }
