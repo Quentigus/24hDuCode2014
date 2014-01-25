@@ -16,6 +16,7 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ public class Jeu {
 	 */
 	public Jeu() {
 		context = new ContextJeu();
+		sequences = new LinkedList<Sequence>();
 	}
 
 	public List<Sequence> getSequences() {

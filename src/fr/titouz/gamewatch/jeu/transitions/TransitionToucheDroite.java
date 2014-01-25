@@ -34,8 +34,10 @@ public class TransitionToucheDroite extends Transition {
 	public void suivant() {
 		if(this.contextDuJeu.getEtatsTouches().get("droite")) {
 			this.etatEntree.setActif(false);
+			this.sequence.getEtatsCourants().remove(etatEntree);
 			for(Etat e: this.etatSortie) {
 				e.setActif(true);
+				this.sequence.getEtatsCourants().add(e);
 			}
 		}
 	}
