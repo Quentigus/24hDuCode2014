@@ -16,6 +16,7 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,6 +26,9 @@ import java.util.List;
 public class Jeu {
 	private List<Sequence> sequences;
 	private ContextJeu context;
+	private boolean continuer;
+	private Thread threadJeu;
+	private List<TourDeJeuListener> ecouteurs;
 	
 	/**
 	 * Crée un jeu.
@@ -32,6 +36,8 @@ public class Jeu {
 	public Jeu() {
 		context = new ContextJeu();
 		sequences = new LinkedList<Sequence>();
+		ecouteurs = new LinkedList<TourDeJeuListener>();
+		threadJeu = createThreadJeu();
 	}
 
 	public List<Sequence> getSequences() {
@@ -43,11 +49,77 @@ public class Jeu {
 	}
 	
 	/**
-	 * Joue un tour (= une transition) du jeu.
+	 * Ajoute un écouteur de tour de jeu.
+	 * 
+	 * @param l l'écouteur de tour de jeu.
+	 */
+	public void addTourDeJeuListener(TourDeJeuListener l) {
+		ecouteurs.add(l);
+	}
+	
+	/**
+	 * Retire un écouteur de tour de jeu.
+	 * 
+	 * @param l l'écouteur à retirer.
+	 */
+	public void removeTourDeJeuListener(TourDeJeuListener l) {
+		ecouteurs.remove(l);
+	}
+	
+	/**
+	 * Joue un tour du jeu.
 	 */
 	public void jouerUnTour() {
 		for(Sequence s: sequences) {
 			s.suivant();
 		}
 	}
+	
+	/**
+	 * Joue une partie.
+	 */
+	public void jouer() {
+		threadJeu.start();
+	}
+	
+	private Thread createThreadJeu() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				executeBoucle();
+			}
+		});
+		return t;
+	}
+
+	private void executeBoucle() {
+		long lastTime, currentTime;
+		synchronized(this) {
+			continuer = true;
+		}
+		while(continuer()) {
+				lastTime = new Date().getTime();
+				//tour
+				jouerUnTour();
+				for(TourDeJeuListener listener : ecouteurs) {
+					listener.notifier();
+				}
+				
+				currentTime = new Date().getTime();
+			try {
+				Thread.sleep(1000 - (currentTime - lastTime));
+			} catch(InterruptedException e) {
+				System.err.println("WARNING : thread de jeu interrompu.");
+			}
+		}
+	}
+	
+	private synchronized boolean continuer() {
+		return continuer;
+	}
+	
+	public synchronized void stop() {
+		continuer = false;
+	}
+
 }
