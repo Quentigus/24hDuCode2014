@@ -20,10 +20,16 @@ public class LeftBarPanel extends JPanel{
 	}
 	
 	public LeftBarPanel init() {
-		this.setOpaque(false);
-		this.setPreferredSize(new Dimension(100,700));
-		this.setLayout(new BorderLayout());
-		this.add(RedButtonPanel.getInstance().init(), BorderLayout.SOUTH);
+		try {
+			this.setOpaque(false);
+			this.setPreferredSize(new Dimension(100,500));
+			this.setLayout(new BorderLayout());
+			this.add(new ImagePanel("ressources/left-arrow.png"), BorderLayout.SOUTH);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return this;
 	}
 
