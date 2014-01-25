@@ -1,26 +1,24 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.JScrollPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -28,77 +26,61 @@ import javax.swing.event.ChangeListener;
  */
 public class DecoupeurSprites extends JPanel {
 
-	private AfficheurImage aff;
-	private PanelSlider slide;
+	private JButton boutChoixIm;
+	
+	private ScrollPaneSelection jsp;
+	
+	private JPanel panelSprites;
 
 	/**
 	 * Default constructor of
 	 * <code>DecoupeurSprites</code>.
 	 */
 	public DecoupeurSprites() {
+		this.setLayout(new BorderLayout());
 
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		this.boutChoixIm = new JButton("Choix Image");
 
-		c.gridx = 0;
-		c.gridy = 0;
-		c.fill = GridBagConstraints.NONE;
-		//c.anchor = GridBagConstraints.NORTHWEST;
-		aff = new AfficheurImage();
-		aff.changeImage("ressources/Sprite1.png");
-		this.add(aff, c);
-
-		slide = new PanelSlider("Largeur du sprite", new ChangeListener() {
+		boutChoixIm.addActionListener(new ActionListener() {
 			@Override
-			public void stateChanged(ChangeEvent e) {
-				MAJLargeurDecoupe();
+			public void actionPerformed(ActionEvent e) {
+				choisirImage();
 			}
 		});
+
+		this.add(boutChoixIm, BorderLayout.NORTH);
+		this.panelSprites = new JPanel(new FlowLayout());
+		this.add (panelSprites,BorderLayout.WEST);
+		panelSprites.add(new JButton());
 		
-		c.gridy = 1;
-		this.add(slide, c);
-
-		this.validate();
-
 	}
 
-	private void MAJLargeurDecoupe() {
-		aff.setLargSprite(slide.getValue());
-	}
-}
-
-class AfficheurImage extends JComponent {
-
-	private BufferedImage image = null;
-
-	private int largSprite = 25;
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		if (image != null) {
-			g2d.drawImage(image, null, 0, 0);
+	private void choisirImage() {
+		System.out.println("charg");
+		JFileChooser chooser = new JFileChooser(new File("C:/Users/Bastien/Documents/NetBeansProjects/24hDuCode2014/ressources"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+		chooser.setFileFilter(filter);
+		int returnVal = chooser.showOpenDialog(this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			chargImage(chooser.getSelectedFile().getPath());
 		}
-		int offsetX = 1;
-		while (offsetX + largSprite < this.getWidth()) {
-			offsetX += largSprite;
-			g2d.drawLine(offsetX, 0, offsetX, this.getHeight());
-		}
+		/*
+		 setSize(300, 250);
+		 setVisible(true);*/
 	}
 
-	public void changeImage(String path) {
+	private void chargImage(String imgPath) {
 		try {
-			image = ImageIO.read(new File(path));
-			System.out.println("hbjkjhgjgjhg");
-			this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+			System.out.println(imgPath);
+			jsp = new ScrollPaneSelection(ImageIO.read(new File(imgPath)),panelSprites);
+			this.add(jsp, BorderLayout.CENTER);
+			this.validate();
+			this.repaint();
+			/*
+			 setSize(300, 250);
+			 setVisible(true);*/
 		} catch (IOException ex) {
-			Logger.getLogger(AfficheurImage.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DecoupeurSprites.class.getName()).log(Level.SEVERE, null, ex);
 		}
-	}
-
-	public void setLargSprite(int largSprite) {
-		this.largSprite = largSprite;
-		this.repaint();
 	}
 }
