@@ -10,44 +10,35 @@
  * 
  * See the GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License along with <programm name>.  
+ * You should have received a copy of the GNU General Public License along with Titz & Watch.  
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.titouz.gamewatch.jeu;
+package fr.titouz.gamewatch.jeu.transitions;
 
-import java.util.LinkedList;
-import java.util.List;
+import fr.titouz.gamewatch.jeu.ContextJeu;
+import fr.titouz.gamewatch.jeu.Etat;
+import fr.titouz.gamewatch.jeu.Sequence;
+import fr.titouz.gamewatch.jeu.Transition;
 
 /**
- * Cette classe représente un game & watch.
+ * Transition s'activant sans condition.
  */
-public class Jeu {
-	private List<Sequence> sequences;
-	private ContextJeu context;
-	
-	/**
-	 * Crée un jeu.
-	 */
-	public Jeu() {
-		context = new ContextJeu();
-		sequences = new LinkedList<Sequence>();
-	}
 
-	public List<Sequence> getSequences() {
-		return sequences;
-	}
+public class TransitionSimple extends Transition{
 
-	public ContextJeu getContext() {
-		return context;
+	public TransitionSimple(ContextJeu context, Sequence s, Etat entree) {
+		super(context, s, entree);
 	}
 	
-	/**
-	 * Joue un tour (= une transition) du jeu.
-	 */
-	public void jouerUnTour() {
-		for(Sequence s: sequences) {
-			s.suivant();
+	@Override
+	public void suivant() {
+		this.etatEntree.setActif(false);
+		this.sequence.getEtatsCourants().remove(etatEntree);
+		for(Etat e: this.etatSortie) {
+			e.setActif(true);
+			this.sequence.getEtatsCourants().add(e);
 		}
 	}
+
 }

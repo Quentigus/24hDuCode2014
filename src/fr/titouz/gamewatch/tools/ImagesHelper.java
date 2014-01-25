@@ -26,7 +26,7 @@ public final class ImagesHelper {
 	 * @return l'image
 	 */
 	public static Image getImage(String name) throws IOException, MalformedURLException {
-		URL url = new File("ressources" + File.separator + "images" + File.separator + name).toURI().toURL();
+		URL url = new File(name).toURI().toURL();
 
 		if (url != null) {
 			return ImageIO.read(url);

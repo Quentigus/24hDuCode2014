@@ -29,7 +29,7 @@ public class MainPanel extends JPanel{
 	
 	public MainPanel init() {
 		this.setBackground(new Color(227, 227, 227));
-		this.setMinimumSize(new Dimension(800,700));
+		this.setMinimumSize(new Dimension(800,500));
 		this.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		this.setLayout(new BorderLayout(5, 5));

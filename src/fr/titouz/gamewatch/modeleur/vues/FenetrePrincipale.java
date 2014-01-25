@@ -4,15 +4,14 @@ import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurFond;
 import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
 import javax.swing.JFrame;
 
-/**
- *
- * @author Bastien Andru <bastien.andru@gmail.com>
- */
-public class FenetrePrincipale extends JFrame{
+import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
+import fr.titouz.gamewatch.modeleur.vues.composants.fond.DecoupeurFond;
+import fr.titouz.gamewatch.modeleur.vues.composants.sprites.PositionnementSprite;
 
-	/**
-	 * Default constructor of <code>FenetrePrincipale</code>.
-	 */
+public class FenetrePrincipale extends JFrame {
+
+	private static final long serialVersionUID = 3189376456185578145L;
+
 	public FenetrePrincipale() {
 		this.setSize(800,600);
 		this.setLocationRelativeTo(null);

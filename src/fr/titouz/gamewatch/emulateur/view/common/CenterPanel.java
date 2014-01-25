@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import fr.titouz.gamewatch.emulateur.view.control.ControlPanel;
 import fr.titouz.gamewatch.emulateur.view.game.GamePanel;
+import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
 
 public class CenterPanel extends JPanel{
 
@@ -26,8 +27,8 @@ public class CenterPanel extends JPanel{
 	public CenterPanel init() {
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(600,700));
-		this.add(GamePanel.getInstance().init(), BorderLayout.NORTH);
+		this.setPreferredSize(new Dimension(600,500));
+		this.add(GameTitlePanel.getInstance().init().setHome(), BorderLayout.NORTH);
 		this.add(ControlPanel.getInstance().init(), BorderLayout.SOUTH);
 		
 		return this;
