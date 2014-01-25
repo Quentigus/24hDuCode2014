@@ -32,5 +32,6 @@ public class FenetrePrincipale extends JFrame{
 		
 		this.setContentPane(new PositionnementSprite());
 		this.validate();
+		this.pack();
 	}
 }
