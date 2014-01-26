@@ -47,7 +47,7 @@ public class FenetrePrincipale extends JFrame {
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 			this.setLayout(new BorderLayout());
-			JLabel topLabel = new JLabel("Assistant création de jeu Titz & Watch");
+			JLabel topLabel = new JLabel("Assistant crï¿½ation de jeu Titz & Watch");
 			topLabel.setFont(new Font(topLabel.getFont().getFontName(), Font.BOLD, 20));
 			topLabel.setIcon(ImagesHelper.getIcon("ressources/wizard-icon.png"));
 			topLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -58,7 +58,7 @@ public class FenetrePrincipale extends JFrame {
 
 			this.add(panelPrincipal, BorderLayout.CENTER);
 
-			this.labelEtape = new JLabel("Bienvenue sur le générateur de Titz & Watch");
+			this.labelEtape = new JLabel("Bienvenue sur le gï¿½nï¿½rateur de Titz & Watch");
 			this.labelEtape.setFont(new Font(this.labelEtape.getFont().getFontName(), Font.BOLD, 17));
 			
 			this.panelPrincipal.add(this.labelEtape, BorderLayout.NORTH);
@@ -92,7 +92,7 @@ public class FenetrePrincipale extends JFrame {
 		
 		switch (indexEtape) {
 		case 1:
-			this.labelEtape.setText("Etape 1 : Découpage des icônes");
+			this.labelEtape.setText("Etape 1 : Dï¿½coupage des icï¿½nes");
 			aAfficher =  new DecoupeurSprites();
 			break;
 		case 2:
@@ -100,16 +100,16 @@ public class FenetrePrincipale extends JFrame {
 			aAfficher = new PanelConfigurationFond();
 			break;
 		case 3 :
-			this.labelEtape.setText("Etape 3 : Positionnement des icônes des objets fixes");
-			aAfficher = new PositionnementSprite();
+			this.labelEtape.setText("Etape 3 : Positionnement des icï¿½nes des objets fixes");
+			aAfficher = new PositionnementSprite(1);
 			break;
 		case 4: 
-			this.labelEtape.setText("Etape 4 : Positionnement des icônes du personnage");
-			aAfficher = new PositionnementSprite();
+			this.labelEtape.setText("Etape 4 : Positionnement des icï¿½nes du personnage");
+			aAfficher = new PositionnementSprite(2);
 			break;
 		case 5:
-			this.labelEtape.setText("Etape 5 : Positionnement de icônes des ennemis");
-			aAfficher = new PositionnementSprite();
+			this.labelEtape.setText("Etape 5 : Positionnement de icï¿½nes des ennemis");
+			aAfficher = new PositionnementSprite(3);
 			break;
 		case 6:
 			try {
