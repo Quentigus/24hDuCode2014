@@ -74,7 +74,9 @@ public class GamePanel extends JPanel{
 				j.ajouterPersonnage(new Sprite(new Point((int)(Math.random()*600),(int)(Math.random()*350)), bi));
 			}
 			for(Sprite s: j.getLesPersonnages()) {
-				g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
+				if(s.isVisible()) {
+					g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
+				}
 			}
 		}
 	}
