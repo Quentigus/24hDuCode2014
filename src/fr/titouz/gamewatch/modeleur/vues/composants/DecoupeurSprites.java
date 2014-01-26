@@ -34,7 +34,7 @@ public class DecoupeurSprites extends JPanel {
 	public DecoupeurSprites() {
 		this.setLayout(new BorderLayout());
 		
-		this.boutChoixIm = new JButton("Choix Image");
+		this.boutChoixIm = new JButton("Parcourir ...");
 		
 		boutChoixIm.addActionListener(new ActionListener() {
 			@Override
@@ -51,22 +51,17 @@ public class DecoupeurSprites extends JPanel {
 	}
 	
 	private void choisirImage() {
-		System.out.println("charg");
-		JFileChooser chooser = new JFileChooser(new File("ressources"));
+		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			chargImage(chooser.getSelectedFile().getPath());
 		}
-		/*
-		 setSize(300, 250);
-		 setVisible(true);*/
 	}
 	
 	private void chargImage(String imgPath) {
 		try {
-			System.out.println(imgPath);
 			if (jsp == null) {
 				jsp = new ScrollPaneSelection(new PanelImagePeignable(ImageIO.read(new File(imgPath))), panelSprites);
 			}
@@ -76,9 +71,6 @@ public class DecoupeurSprites extends JPanel {
 			this.add(jsp, BorderLayout.CENTER);
 			this.validate();
 			this.repaint();
-			/*
-			 setSize(300, 250);
-			 setVisible(true);*/
 		} catch (IOException ex) {
 			Logger.getLogger(DecoupeurSprites.class.getName()).log(Level.SEVERE, null, ex);
 		}

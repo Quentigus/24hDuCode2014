@@ -34,6 +34,7 @@ public class DecoupeurFond extends JPanel {
 			public void mouseReleased(MouseEvent e) {
 				panel.setDecalages(click, e.getPoint());
 				panel.resetAncienPtDrag();
+				sauvegarderImage();
 			}
 		});
 		
@@ -48,9 +49,11 @@ public class DecoupeurFond extends JPanel {
 		this.add(this.panel, BorderLayout.CENTER);
 	}
 	
-	public void updateFond() {
-		if (Jeu.getInstance().getFond() != null) {
-			this.panel.setImage(Jeu.getInstance().getFond());
-		}
+	public void updateImage() {
+		this.panel.setImage(Jeu.getInstance().getFond());
+	}
+	
+	public void sauvegarderImage() {
+		Jeu.getInstance().setFond(this.panel.getImage());
 	}
 }

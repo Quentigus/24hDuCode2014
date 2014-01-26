@@ -1,143 +1,145 @@
 package fr.titouz.gamewatch.modeleur.vues;
 
-import fr.titouz.gamewatch.modeleur.vues.composants.ChargerFond;
-import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurFond;
-import javax.swing.JFrame;
-
-import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
-import fr.titouz.gamewatch.modeleur.vues.composants.PositionnementSprite;
-import fr.titouz.gamewatch.tools.ImagesHelper;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTree;
-import javax.swing.SwingConstants;
-import javax.swing.tree.TreeNode;
+
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
+import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
+import fr.titouz.gamewatch.modeleur.vues.composants.PanelConfigurationFond;
+import fr.titouz.gamewatch.modeleur.vues.composants.PanelImage;
+import fr.titouz.gamewatch.modeleur.vues.composants.PositionnementSprite;
+import fr.titouz.gamewatch.tools.ImagesHelper;
 
 public class FenetrePrincipale extends JFrame {
 
 	private static final long serialVersionUID = 3189376456185578145L;
-	private LinkedHashMap<JPanel,String> mapEtapes;
+
 	private JPanel panelPrincipal;
-	private int indexEtape = -1;
+
+	private int indexEtape = 0;
+
 	private JButton boutSuivant;
-	
+	private JLabel labelEtape;
+
 	public FenetrePrincipale() {
 		try {
-			
-			this.mapEtapes = new LinkedHashMap<>();
-			
-			mapEtapes.put(new DecoupeurSprites(),"1");
-		mapEtapes.put(new ChargerFond(),"2.1");
-		mapEtapes.put(new DecoupeurFond(),"2.2");
-		mapEtapes.put(new PositionnementSprite(),"3");
-		mapEtapes.put(new PositionnementSprite(),"4");
-		mapEtapes.put(new PositionnementSprite(),"5");
-		mapEtapes.put(new JPanel(),"6");
-		mapEtapes.put(new JPanel(),"7");
-			
-			
-			mapEtapes.put(new JPanel(), "test1");
-			mapEtapes.put(new JPanel(), "test2");
-			
 			this.setSize(new Dimension(1200, 800));
 			this.setMinimumSize(new Dimension(1000, 600));
 			this.setLocationRelativeTo(null);
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-			this.setLayout(new GridBagLayout());
-
-			GridBagConstraints c = new GridBagConstraints();
-
-			c.gridx = 0;
-			c.gridy = 0;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.weighty = 1;
-			c.weightx = 10;
-			c.anchor = GridBagConstraints.CENTER;
-
-			JLabel topLabel = new JLabel("Assistant crÃ©ation de jeu Titz & Watch");
+			this.setLayout(new BorderLayout());
+			JLabel topLabel = new JLabel("Assistant création de jeu Titz & Watch");
+			topLabel.setFont(new Font(topLabel.getFont().getFontName(), Font.BOLD, 20));
 			topLabel.setIcon(ImagesHelper.getIcon("ressources/wizard-icon.png"));
 			topLabel.setHorizontalAlignment(JLabel.CENTER);
 
-			this.add(topLabel,c);
-			
-			c.gridx = 0;
-			c.gridy = 1;
-			c.fill = GridBagConstraints.BOTH;
-			c.weighty = 8;
-			c.weightx = 1;
-			c.anchor = GridBagConstraints.WEST;
-			
-			JList listeGauche = new JList(new Vector<String>(mapEtapes.values()));
-			
-			this.add(listeGauche,c);
-			
+			this.add(topLabel, BorderLayout.NORTH);
+
 			panelPrincipal = new JPanel(new BorderLayout());
+
+			this.add(panelPrincipal, BorderLayout.CENTER);
+
+			this.labelEtape = new JLabel("Bienvenue sur le générateur de Titz & Watch");
+			this.labelEtape.setFont(new Font(this.labelEtape.getFont().getFontName(), Font.BOLD, 17));
 			
-			panelPrincipal.setOpaque(true);
-			panelPrincipal.setBackground(Color.red);
-			
-			panelPrincipal.add(new JLabel("Bienvenue"));
-			
-			c.gridx = 1;
-			c.gridy = 1;
-			c.fill = GridBagConstraints.BOTH;
-			c.weighty = 8;
-			c.weightx = 39;
-			c.anchor = GridBagConstraints.WEST;
-			
-			this.add(panelPrincipal,c);
+			this.panelPrincipal.add(this.labelEtape, BorderLayout.NORTH);
 			
 			JPanel panelBas = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-			
-			boutSuivant = new JButton("Suivant");
-			
-			panelBas.add(boutSuivant);
-			
-			boutSuivant.addActionListener(new ActionListener() {
 
+			boutSuivant = new JButton("Suivant");
+
+			panelBas.add(boutSuivant);
+
+			boutSuivant.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					appuiSuivant();
 				}
 			});
-			
-			c.gridx = 0;
-			c.gridy = 2;
-			c.fill = GridBagConstraints.HORIZONTAL;
-			c.weighty = 1;
-			c.weightx = 1;
-			
-			this.add(panelBas,c);
-			
+
+			this.add(panelBas, BorderLayout.SOUTH);
+
+
 			this.setVisible(true);
 			this.revalidate();
 		} catch (MalformedURLException ex) {
 			Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
-	private void appuiSuivant(){
+
+	private void appuiSuivant() {
+		JPanel aAfficher = null;
 		indexEtape++;
+		
+		switch (indexEtape) {
+		case 1:
+			this.labelEtape.setText("Etape 1 : Découpage des icônes");
+			aAfficher =  new DecoupeurSprites();
+			break;
+		case 2:
+			this.labelEtape.setText("Etape 2 : Chargement du fond");
+			aAfficher = new PanelConfigurationFond();
+			break;
+		case 3 :
+			this.labelEtape.setText("Etape 3 : Positionnement des icônes des objets fixes");
+			aAfficher = new PositionnementSprite();
+			break;
+		case 4: 
+			this.labelEtape.setText("Etape 4 : Positionnement des icônes du personnage");
+			aAfficher = new PositionnementSprite();
+			break;
+		case 5:
+			this.labelEtape.setText("Etape 5 : Positionnement de icônes des ennemis");
+			aAfficher = new PositionnementSprite();
+			break;
+		case 6:
+			try {
+				this.labelEtape.setText("Etape 6 : Sauvegarde des informations");
+				aAfficher = new PanelImage(ImageIO.read(new File("ressources/screen_home.png")));
+				FileOutputStream fichier;
+				try {
+					fichier = new FileOutputStream("test.titz");
+					ObjectOutputStream oos = new ObjectOutputStream(fichier);
+					oos.writeObject(Jeu.getInstance());
+					oos.flush();
+					oos.close();
+					
+					this.boutSuivant.setVisible(false);
+				} catch (FileNotFoundException e) {
+					Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, e);
+				} catch (IOException e) {
+					Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, e);
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			break;
+		}
 		this.panelPrincipal.removeAll();
-		this.panelPrincipal.add(new LinkedList<JPanel>(mapEtapes.keySet()).get(indexEtape),BorderLayout.CENTER);
+		this.panelPrincipal.add(this.labelEtape, BorderLayout.NORTH);
+		
+		if (aAfficher != null) {
+			this.panelPrincipal.add(aAfficher, BorderLayout.CENTER);
+		}
 		this.revalidate();
 		this.repaint();
 	}

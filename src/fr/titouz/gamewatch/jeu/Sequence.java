@@ -27,14 +27,25 @@ public class Sequence implements Serializable {
 	private List<Etat> etatsCourants;
 	
 	/**
-	 * Crée une séquence.
+	 * Crée une séquence. L'état initial est automatiquement ajouté aux états courants.
 	 * 
 	 * @param init état initial de la séquence.
 	 */
 	public Sequence(Etat init) {
+		this(init, true);
+	}
+	/**
+	 * Crée une séquence.
+	 * 
+	 * @param init état initial de la séquence.
+	 * @param addToEtatCourant true pour ajouter automatiquement l'état initial aux etats courant.
+	 */
+	public Sequence(Etat init, boolean addToEtatCourant) {
 		super();
 		etatsCourants = new LinkedList<Etat>();
 		etatInitial = init;
+		if(addToEtatCourant)
+			etatsCourants.add(etatInitial);
 	}
 
 	public Etat getEtatInitial() {
