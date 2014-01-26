@@ -12,12 +12,19 @@ import fr.titouz.gamewatch.tools.ImagesHelper;
 public class BoutonSprite extends JToggleButton {
 
 	private static final long serialVersionUID = 6737419205564959202L;
+	
+	private BufferedImage selectedSprite;
 
 	public BoutonSprite(BufferedImage pImage) {
+		this.selectedSprite = pImage;
 		this.setVerticalTextPosition(SwingConstants.BOTTOM);
 		this.setHorizontalTextPosition(SwingConstants.CENTER);
-		this.setIcon(new ImageIcon(ImagesHelper.resizeImg(pImage, 35, 35)));
+		this.setIcon(new ImageIcon(ImagesHelper.resizeImg(selectedSprite, 35, 35)));
 		this.setPreferredSize(new Dimension(90, 70));
-		this.setText(pImage.getWidth() + "x" + pImage.getHeight());
+		this.setText(selectedSprite.getWidth() + "x" + selectedSprite.getHeight());
+	}
+
+	public BufferedImage getSelectedSprite() {
+		return selectedSprite;
 	}
 }

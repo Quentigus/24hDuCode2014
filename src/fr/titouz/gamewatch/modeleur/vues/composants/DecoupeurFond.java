@@ -20,7 +20,7 @@ public class DecoupeurFond extends JPanel {
 	public DecoupeurFond() {
 		this.setLayout(new BorderLayout());
 		
-		this.panel = new PanelImage();
+		this.panel = new PanelImage(-1);
 		this.panel.setAfficherEcran(true);
 		
 		this.panel.ajouterListener(new MouseAdapter() {

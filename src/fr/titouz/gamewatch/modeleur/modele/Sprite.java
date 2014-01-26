@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
+import fr.titouz.gamewatch.jeu.Etat;
 import fr.titouz.gamewatch.tools.EasyBufferedImage;
 
 public class Sprite implements Serializable {
@@ -27,10 +28,12 @@ public class Sprite implements Serializable {
 	private static final long serialVersionUID = 8449098848147438233L;
 	private Point coordonnees;
 	private int[][] image;
+	private Etat etat;
 	
 	public Sprite(Point coordonnees, BufferedImage image) {
 		this.coordonnees = coordonnees;
 		this.image = EasyBufferedImage.createImage(image).getPixels2D(EasyBufferedImage.ALPHA);
+		this.etat = null;
 	}
 
 	public Point getCoordonnees() {
@@ -39,5 +42,29 @@ public class Sprite implements Serializable {
 
 	public BufferedImage getImage() {
 		return EasyBufferedImage.createImage(image);
+	}
+	
+	/**
+	 * Indique si le sprite doit être affiché.
+	 * 
+	 * @return true si le sprite doit être affiché, sinon false.
+	 */
+	public boolean isVisible() {
+		if(this.etat == null) {
+			return true;
+		}
+		return etat.isActif();
+	}
+
+	public Etat getEtat() {
+		return etat;
+	}
+
+	public void setEtat(Etat etat) {
+		this.etat = etat;
+	}
+	
+	public void setCoordonnees(Point coordonnees) {
+		this.coordonnees = coordonnees;
 	}
 }
