@@ -2,6 +2,7 @@ package fr.titouz.gamewatch.modeleur.vues.composants;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,10 +26,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Bastien Andru <bastien.andru@gmail.com>
  */
 public class DecoupeurSprites extends JPanel {
-
+	
 	private JButton boutChoixIm;
 	
-	private ScrollPaneSelection jsp;
+	private ScrollPaneSelection jsp = null;
 	
 	private JPanel panelSprites;
 
@@ -38,26 +39,26 @@ public class DecoupeurSprites extends JPanel {
 	 */
 	public DecoupeurSprites() {
 		this.setLayout(new BorderLayout());
-
+		
 		this.boutChoixIm = new JButton("Choix Image");
-
+		
 		boutChoixIm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				choisirImage();
 			}
 		});
-
+		
 		this.add(boutChoixIm, BorderLayout.NORTH);
 		this.panelSprites = new JPanel(new FlowLayout());
-		this.add (panelSprites,BorderLayout.WEST);
-		panelSprites.add(new JButton());
+		this.add(panelSprites, BorderLayout.WEST);
+		panelSprites.setPreferredSize(new Dimension(300, 20));
 		
 	}
-
+	
 	private void choisirImage() {
 		System.out.println("charg");
-		JFileChooser chooser = new JFileChooser(new File("C:/Users/Bastien/Documents/NetBeansProjects/24hDuCode2014/ressources"));
+		JFileChooser chooser = new JFileChooser(new File("ressources"));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(this);
@@ -68,11 +69,16 @@ public class DecoupeurSprites extends JPanel {
 		 setSize(300, 250);
 		 setVisible(true);*/
 	}
-
+	
 	private void chargImage(String imgPath) {
 		try {
 			System.out.println(imgPath);
-			jsp = new ScrollPaneSelection(ImageIO.read(new File(imgPath)),panelSprites);
+			if (jsp == null) {
+				jsp = new ScrollPaneSelection(new PanelImagePeignable(ImageIO.read(new File(imgPath))), panelSprites);
+			}
+			else {
+				jsp.getPan().setImage(imgPath);
+			}
 			this.add(jsp, BorderLayout.CENTER);
 			this.validate();
 			this.repaint();
