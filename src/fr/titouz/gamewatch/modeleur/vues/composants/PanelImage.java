@@ -36,6 +36,9 @@ public class PanelImage extends JPanel {
 	public void setImage(BufferedImage img) {
 		this.image = img;
 		this.setPreferredSize(new Dimension(this.image.getWidth(), this.image.getHeight()));
+		
+		this.repaint();
+		this.validate();
 	}
 
 	public void setDecalages(Point ptClick, Point ptDrag) {

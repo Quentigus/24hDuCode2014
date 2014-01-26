@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurFond;
 import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
 import fr.titouz.gamewatch.modeleur.vues.composants.PanelConfigurationFond;
+import fr.titouz.gamewatch.modeleur.vues.composants.PanelImage;
 import fr.titouz.gamewatch.modeleur.vues.composants.PositionnementSprite;
 import fr.titouz.gamewatch.tools.ImagesHelper;
 
@@ -32,7 +33,7 @@ public class FenetrePrincipale extends JFrame {
 
 	private JPanel panelPrincipal;
 
-	private int indexEtape = -1;
+	private int indexEtape = 0;
 
 	private JButton boutSuivant;
 
@@ -41,16 +42,7 @@ public class FenetrePrincipale extends JFrame {
 
 			this.mapEtapes = new LinkedHashMap<>();
 
-			mapEtapes.put(new DecoupeurSprites(), "1");
-			mapEtapes.put(new PanelConfigurationFond(), "2.1");
-			mapEtapes.put(new DecoupeurFond(), "2.2");
-			mapEtapes.put(new PositionnementSprite(), "3");
-			mapEtapes.put(new PositionnementSprite(), "4");
-			mapEtapes.put(new PositionnementSprite(), "5");
-			mapEtapes.put(new JPanel(), "6");
-			mapEtapes.put(new JPanel(), "7");
-
-
+			
 			mapEtapes.put(new JPanel(), "test1");
 			mapEtapes.put(new JPanel(), "test2");
 
@@ -97,9 +89,34 @@ public class FenetrePrincipale extends JFrame {
 	}
 
 	private void appuiSuivant() {
+		JPanel aAfficher = null;
 		indexEtape++;
+		
+		switch (indexEtape) {
+		case 1:
+			aAfficher =  new DecoupeurSprites();
+			break;
+		case 2:
+			aAfficher = new PanelConfigurationFond();
+			break;
+		case 3 :
+			aAfficher = new PositionnementSprite();
+			break;
+		case 4: 
+			aAfficher = new PositionnementSprite();
+			break;
+		case 5:
+			aAfficher = new PositionnementSprite();
+			break;
+		case 6:
+			aAfficher = new PanelImage();
+			break;
+		}
 		this.panelPrincipal.removeAll();
-		this.panelPrincipal.add(new LinkedList<JPanel>(mapEtapes.keySet()).get(indexEtape), BorderLayout.CENTER);
+		
+		if (aAfficher != null) {
+			this.panelPrincipal.add(aAfficher, BorderLayout.CENTER);
+		}
 		this.revalidate();
 		this.repaint();
 	}
