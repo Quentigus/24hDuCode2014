@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
@@ -34,6 +35,7 @@ public class DecoupeurFond extends JPanel {
 			public void mouseReleased(MouseEvent e) {
 				panel.setDecalages(click, e.getPoint());
 				panel.resetAncienPtDrag();
+				sauvegarderImage();
 			}
 		});
 		
@@ -48,9 +50,11 @@ public class DecoupeurFond extends JPanel {
 		this.add(this.panel, BorderLayout.CENTER);
 	}
 	
-	public void updateFond() {
-		if (Jeu.getInstance().getFond() != null) {
-			this.panel.setImage(Jeu.getInstance().getFond());
-		}
+	public void updateImage() {
+		this.panel.setImage(Jeu.getInstance().getFond());
+	}
+	
+	public void sauvegarderImage() {
+		Jeu.getInstance().setFond(this.panel.getImage());
 	}
 }
