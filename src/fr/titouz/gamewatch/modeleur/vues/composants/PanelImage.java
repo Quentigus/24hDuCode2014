@@ -6,11 +6,7 @@ import java.awt.Point;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class PanelImage extends JPanel {
@@ -37,15 +33,9 @@ public class PanelImage extends JPanel {
 		this.addMouseMotionListener(pListener);
 	}
 
-	public void setImage(String url) {
-		try {
-			this.image = ImageIO.read(new URL("file:\\" + url));
-			this.setPreferredSize(new Dimension(this.image.getWidth(), this.image.getHeight()));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void setImage(BufferedImage img) {
+		this.image = img;
+		this.setPreferredSize(new Dimension(this.image.getWidth(), this.image.getHeight()));
 	}
 
 	public void setDecalages(Point ptClick, Point ptDrag) {
