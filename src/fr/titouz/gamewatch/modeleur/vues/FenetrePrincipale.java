@@ -5,9 +5,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurFond;
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
 import fr.titouz.gamewatch.modeleur.vues.composants.PanelConfigurationFond;
 import fr.titouz.gamewatch.modeleur.vues.composants.PanelImage;
@@ -116,6 +120,20 @@ public class FenetrePrincipale extends JFrame {
 		
 		if (aAfficher != null) {
 			this.panelPrincipal.add(aAfficher, BorderLayout.CENTER);
+		}
+		else {
+			FileOutputStream fichier;
+			try {
+				fichier = new FileOutputStream("test.titz");
+				ObjectOutputStream oos = new ObjectOutputStream(fichier);
+				oos.writeObject(Jeu.getInstance());
+				oos.flush();
+				oos.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		this.revalidate();
 		this.repaint();
