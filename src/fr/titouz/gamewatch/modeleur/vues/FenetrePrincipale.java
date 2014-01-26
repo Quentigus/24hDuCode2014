@@ -100,16 +100,16 @@ public class FenetrePrincipale extends JFrame {
 			aAfficher = new PanelConfigurationFond();
 			break;
 		case 3 :
-			aAfficher = new PositionnementSprite();
+			aAfficher = new PositionnementSprite(1);
 			break;
 		case 4: 
-			aAfficher = new PositionnementSprite();
+			aAfficher = new PositionnementSprite(2);
 			break;
 		case 5:
-			aAfficher = new PositionnementSprite();
+			aAfficher = new PositionnementSprite(3);
 			break;
 		case 6:
-			aAfficher = new PanelImage();
+			aAfficher = new PanelImage(-1);
 			break;
 		}
 		this.panelPrincipal.removeAll();

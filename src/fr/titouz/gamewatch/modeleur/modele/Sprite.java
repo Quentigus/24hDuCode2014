@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -37,5 +37,9 @@ public class Sprite implements Serializable {
 
 	public BufferedImage getImage() {
 		return image;
+	}
+
+	public void setCoordonnees(Point coordonnees) {
+		this.coordonnees = coordonnees;
 	}
 }
