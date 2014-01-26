@@ -20,6 +20,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
+import fr.titouz.gamewatch.jeu.Etat;
 import fr.titouz.gamewatch.tools.ImageSerialisable;
 
 public class Sprite implements Serializable {
@@ -27,10 +28,12 @@ public class Sprite implements Serializable {
 	private static final long serialVersionUID = 8449098848147438233L;
 	private Point coordonnees;
 	private ImageSerialisable image;
+	private Etat etat;
 	
 	public Sprite(Point coordonnees, BufferedImage image) {
 		this.coordonnees = coordonnees;
 		this.image = new ImageSerialisable(image);
+		this.etat = null;
 	}
 
 	public Point getCoordonnees() {
@@ -39,5 +42,25 @@ public class Sprite implements Serializable {
 
 	public BufferedImage getImage() {
 		return image.getImage();
+	}
+	
+	/**
+	 * Indique si le sprite doit être affiché.
+	 * 
+	 * @return true si le sprite doit être affiché, sinon false.
+	 */
+	public boolean isVisible() {
+		if(this.etat == null) {
+			return true;
+		}
+		return etat.isActif();
+	}
+
+	public Etat getEtat() {
+		return etat;
+	}
+
+	public void setEtat(Etat etat) {
+		this.etat = etat;
 	}
 }
