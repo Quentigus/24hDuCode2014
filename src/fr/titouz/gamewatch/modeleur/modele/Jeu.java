@@ -11,7 +11,7 @@ public class Jeu implements Serializable {
 	private ArrayList<Sprite> lesEnnemies;
 	private ArrayList<Sprite> lesFixes;
 	private ArrayList<Sprite> lesPersonnages;
-	private ArrayList<Sprite> lesSequences;
+	private ArrayList<Sequence> lesSequences;
 	
 	public BufferedImage getFond() {
 		return fond;
