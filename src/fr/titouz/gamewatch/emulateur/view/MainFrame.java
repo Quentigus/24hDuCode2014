@@ -39,6 +39,7 @@ public class MainFrame extends JFrame{
 	}
 	
 	public MainFrame init() {
+		this.setTitle("Titz & Watch - #24hDuCode - #lesTitouz");
 		this.setMinimumSize(new Dimension(820, 520));
 		this.setContentPane(MainPanel.getInstance().init());
 		
