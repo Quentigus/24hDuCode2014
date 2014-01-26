@@ -24,10 +24,19 @@ public class Jeu implements Serializable {
 
 	private static final long serialVersionUID = -3149764703072717787L;
 	private BufferedImage fond;
+	private String nom;
 	private ArrayList<Sprite> lesEnnemies;
 	private ArrayList<Sprite> lesFixes;
 	private ArrayList<Sprite> lesPersonnages;
 	private ArrayList<GTransition> lesSequences;
+	
+	public String getNom()  {
+		return nom;
+	}
+	
+	public void setString(String nom) {
+		this.nom = nom;
+	}
 	
 	public BufferedImage getFond() {
 		return fond;
