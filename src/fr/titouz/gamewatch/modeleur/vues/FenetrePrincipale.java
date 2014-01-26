@@ -101,15 +101,15 @@ public class FenetrePrincipale extends JFrame {
 			break;
 		case 3 :
 			this.labelEtape.setText("Etape 3 : Positionnement des ic�nes des objets fixes");
-			aAfficher = new PositionnementSprite();
+			aAfficher = new PositionnementSprite(1);
 			break;
 		case 4: 
 			this.labelEtape.setText("Etape 4 : Positionnement des ic�nes du personnage");
-			aAfficher = new PositionnementSprite();
+			aAfficher = new PositionnementSprite(2);
 			break;
 		case 5:
 			this.labelEtape.setText("Etape 5 : Positionnement de ic�nes des ennemis");
-			aAfficher = new PositionnementSprite();
+			aAfficher = new PositionnementSprite(3);
 			break;
 		case 6:
 			try {
