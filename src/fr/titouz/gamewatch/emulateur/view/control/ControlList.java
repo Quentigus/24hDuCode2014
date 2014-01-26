@@ -22,8 +22,6 @@ public class ControlList extends JList<String>{
 	
 	private static ControlList instance;
 	private String[] games;
-	private String url_fond = "ressources/right-arrow.png";
-	private Image img;
 	
 	private ControlList() {
 	}
@@ -39,6 +37,7 @@ public class ControlList extends JList<String>{
 		this.games = ControlController.getInstance().getListGames();
 		this.setListData(this.games);
 		this.setCellRenderer(new WatchRenderCell());
+		this.setBackground(new Color(183,183,148));
 		
 		//event
 		this.addKeyListener(new KeyAdapter() {
@@ -53,19 +52,6 @@ public class ControlList extends JList<String>{
 		return this;
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponents(g);
-		try {
-			this.img = ImagesHelper.getImage(this.url_fond);
-			if(this.img != null) {
-				g.drawImage(this.img,0,0,this);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	
 	private class WatchRenderCell extends JLabel implements ListCellRenderer{
 
@@ -76,11 +62,11 @@ public class ControlList extends JList<String>{
 			setText(value.toString());
 			setOpaque(true);
 			if(isSelected || cellHasFocus) {
-				setForeground(Color.white);
+				setForeground(new Color(183,183,148));
 				setBackground(new Color(87,87,87));
 			}
 			else {
-				setBackground(Color.white);
+				setBackground(new Color(183,183,148));
 				setForeground(new Color(87,87,87));
 			}
 			this.setPreferredSize(new Dimension(500,45));
