@@ -100,7 +100,9 @@ public class PositionnementSprite extends JPanel {
 			SwingUtilities.convertPointToScreen(ptConvEcr, panelEcran);
 			Point ptConvPanImage = ptConvEcr;
 			SwingUtilities.convertPointFromScreen(ptConvPanImage, panelEcran.getEcran());
-		spriteEnCours.setCoordonnees(ptConvPanImage);
+		if(spriteEnCours != null) {
+			spriteEnCours.setCoordonnees(ptConvPanImage);
+		}
 		this.repaint();
 	} 
 }

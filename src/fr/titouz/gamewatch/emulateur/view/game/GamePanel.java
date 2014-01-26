@@ -69,7 +69,9 @@ public class GamePanel extends JPanel{
 				g.drawImage(j.getFond(),0,0,this);
 			}
 			for(Sprite s: j.getLesPersonnages()) {
-				g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
+				if(s.isVisible()) {
+					g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
+				}
 			}
 		}
 	}

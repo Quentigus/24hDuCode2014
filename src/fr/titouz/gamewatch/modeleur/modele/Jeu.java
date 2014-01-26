@@ -56,6 +56,8 @@ public class Jeu implements Serializable {
 	}
 	
 	public BufferedImage getFond() {
+		if(fond == null)
+			return null;
 		return fond.getImage();
 	}
 	
