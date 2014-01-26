@@ -68,11 +68,6 @@ public class GamePanel extends JPanel{
 			if(j.getFond() != null) {
 				g.drawImage(j.getFond(),0,0,this);
 			}
-			System.out.println(j.getLesSpritesDecoupes().size());
-			int n = 0;
-			for(BufferedImage bi : j.getLesSpritesDecoupes()) {
-				j.ajouterPersonnage(new Sprite(new Point((int)(Math.random()*600),(int)(Math.random()*350)), bi));
-			}
 			for(Sprite s: j.getLesPersonnages()) {
 				g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
 			}
