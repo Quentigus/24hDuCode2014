@@ -48,10 +48,7 @@ public class GamePanel extends JPanel{
 		this.setPreferredSize(new Dimension(600,350));
 		this.setMaximumSize(new Dimension(600,350));
 		
-		if(MainController.getInstance().isGameOn()) {
-			
-		}
-		else {
+		if(!MainController.getInstance().isGameOn()) {
 			this.setBackground(Color.black);
 		}
 		
