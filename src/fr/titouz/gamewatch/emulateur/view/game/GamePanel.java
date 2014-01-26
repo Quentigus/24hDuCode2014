@@ -101,7 +101,6 @@ public class GamePanel extends JPanel{
 		Jeu j = MainController.getInstance().getJeu();
 		List<Sprite> list = j.getLesPersonnages();
 		if(list.size() >= 4) {
-			System.out.println("test 1");
 			Etat e1 = new Etat();
 			e1.setActif(true);
 			Etat e2 = new Etat();
@@ -130,7 +129,7 @@ public class GamePanel extends JPanel{
 			for(int i = 0; i < 4; i++) {
 				list.get(i).setEtat(listener.e[i]);
 			}
-			System.out.println("Test 2");
+
 			jeu.addTourDeJeuListener(listener);
 			listener.notifier();
 			jeu.jouer();
