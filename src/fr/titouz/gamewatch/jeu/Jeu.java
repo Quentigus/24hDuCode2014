@@ -29,6 +29,8 @@ public class Jeu {
 	private boolean continuer;
 	private Thread threadJeu;
 	private List<TourDeJeuListener> ecouteurs;
+	private Condition echecCondition;
+	private Condition gagneCondition;
 	
 	/**
 	 * Crée un jeu.
@@ -38,6 +40,8 @@ public class Jeu {
 		sequences = new LinkedList<Sequence>();
 		ecouteurs = new LinkedList<TourDeJeuListener>();
 		threadJeu = createThreadJeu();
+		echecCondition = null;
+		gagneCondition = null;
 	}
 
 	public List<Sequence> getSequences() {
@@ -48,6 +52,14 @@ public class Jeu {
 		return context;
 	}
 	
+	public void setEchecCondition(Condition echecCondition) {
+		this.echecCondition = echecCondition;
+	}
+
+	public void setGagneCondition(Condition gagneCondition) {
+		this.gagneCondition = gagneCondition;
+	}
+
 	/**
 	 * Ajoute un écouteur de tour de jeu.
 	 * 
@@ -98,14 +110,18 @@ public class Jeu {
 			continuer = true;
 		}
 		while(continuer()) {
-				lastTime = new Date().getTime();
-				//tour
-				jouerUnTour();
-				for(TourDeJeuListener listener : ecouteurs) {
-					listener.notifier();
-				}
-				
-				currentTime = new Date().getTime();
+			lastTime = new Date().getTime();
+			//tour
+			jouerUnTour();
+			for(TourDeJeuListener listener : ecouteurs) {
+				listener.notifier();
+			}
+			
+			if(isGagne() || isEchec()) {
+				break;
+			}
+			
+			currentTime = new Date().getTime();
 			try {
 				Thread.sleep(1000 - (currentTime - lastTime));
 			} catch(InterruptedException e) {
@@ -122,4 +138,25 @@ public class Jeu {
 		continuer = false;
 	}
 
+	/**
+	 * Test si le jeu est en gagne.
+	 * 
+	 * @return true si la condition de succès est remplie. Si pas de condition retourne false.
+	 */
+	public boolean isGagne() {
+		if(gagneCondition == null)
+			return false;
+		return gagneCondition.isTrue();
+	}
+	
+	/**
+	 * Test si le jeu est en échec.
+	 * 
+	 * @return true si la condition d'échec est remplie. Si pas de condition retourne false.
+	 */
+	public boolean isEchec() {
+		if(echecCondition == null)
+			return false;
+		return echecCondition.isTrue();
+	}
 }
