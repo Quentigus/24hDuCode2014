@@ -26,6 +26,7 @@ import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
 import fr.titouz.gamewatch.modeleur.vues.composants.PanelConfigurationFond;
 import fr.titouz.gamewatch.modeleur.vues.composants.PanelImage;
 import fr.titouz.gamewatch.modeleur.vues.composants.PositionnementSprite;
+import fr.titouz.gamewatch.modeleur.vues.composants.SequenceSprite;
 import fr.titouz.gamewatch.tools.ImagesHelper;
 
 public class FenetrePrincipale extends JFrame {
@@ -112,8 +113,16 @@ public class FenetrePrincipale extends JFrame {
 			aAfficher = new PositionnementSprite(3);
 			break;
 		case 6:
+			this.labelEtape.setText("Etape 6 : Définition des séquences des personnages");
+			aAfficher = new SequenceSprite(1);
+			break;
+		case 7:
+			this.labelEtape.setText("Etape 7 : Définition des séquences des ennemis");
+			aAfficher = new SequenceSprite(2);
+			break;
+		case 8:
 			try {
-				this.labelEtape.setText("Etape 6 : Sauvegarde des informations");
+				this.labelEtape.setText("Etape 8 : Sauvegarde des informations");
 				aAfficher = new PanelImage(ImageIO.read(new File("ressources/screen_home.png")));
 				FileOutputStream fichier;
 				try {
