@@ -1,5 +1,6 @@
 package fr.titouz.gamewatch.emulateur.controller;
 
+import java.io.File;
 import java.util.List;
 
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
@@ -30,15 +31,19 @@ public class ControlController {
 
 	public void enterListControl(String selectedValue) {
 		if(selectedValue != null && !MainController.getInstance().isGameOn()) {
+			String url = "C:\\"+selectedValue.replaceAll(" ", "_")+".titz";
+			chargerJeu(url);
 			MainController.getInstance().launchGame();
 			CenterPanel.getInstance().changerEcranToGame();
-		}
-		else {
-			CenterPanel.getInstance().changerEcranToGameOver();
 		}
 		
 	}
 	
+	private void chargerJeu(String url) {
+		File f = new File(url);
+		
+	}
+
 	public void rightControl() {
 		if(MainController.getInstance().isGameOn()) {
 			System.out.println("right");

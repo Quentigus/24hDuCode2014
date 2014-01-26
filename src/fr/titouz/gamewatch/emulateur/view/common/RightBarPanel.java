@@ -45,7 +45,6 @@ public class RightBarPanel extends JPanel{
 			this.setOpaque(false);
 			this.setPreferredSize(new Dimension(100,500));
 			this.setLayout(new BorderLayout());
-			this.add(EmulateurTitleLabel.getInstance().init(),BorderLayout.NORTH);
 
 			this.add(new ImagePanel("ressources/flecheGauche.png"), BorderLayout.SOUTH);
 		} catch (Exception e) {
