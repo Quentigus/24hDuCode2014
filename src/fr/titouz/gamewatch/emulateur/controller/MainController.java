@@ -5,7 +5,7 @@ import fr.titouz.gamewatch.emulateur.view.MainFrame;
 public class MainController {
 	
 	private static MainController instance;
-	private boolean gameIsOn = true;
+	private boolean gameIsOn = false;
 
 	private MainController() {
 	}
@@ -26,6 +26,11 @@ public class MainController {
 	
 	public boolean isGameOn() {
 		return this.gameIsOn;
+	}
+
+	public void launchGame() {
+		// TODO Auto-generated method stub
+		this.gameIsOn = true;
 	}
 
 }

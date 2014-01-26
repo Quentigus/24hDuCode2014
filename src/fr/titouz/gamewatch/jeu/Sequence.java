@@ -10,17 +10,19 @@
  * 
  * See the GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License along with <programm name>.  
+ * You should have received a copy of the GNU General Public License along with Titz & Watch.  
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
 package fr.titouz.gamewatch.jeu;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class Sequence {
+public class Sequence implements Serializable {
+	private static final long serialVersionUID = 608080587374031553L;
 	private Etat etatInitial;
 	private List<Etat> etatsCourants;
 	

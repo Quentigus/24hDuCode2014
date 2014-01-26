@@ -39,8 +39,6 @@ public class GameTitlePanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		try {
-			System.out.println(url_current);
-			System.out.println((new Date()).getTime());
 			if(!this.url_current.equalsIgnoreCase("")) {
 				this.img = ImagesHelper.getImage(this.url_current);
 			}

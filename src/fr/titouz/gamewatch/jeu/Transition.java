@@ -10,30 +10,53 @@
  * 
  * See the GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License along with <programm name>.  
+ * You should have received a copy of the GNU General Public License along with Titz & Watch.  
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
 package fr.titouz.gamewatch.jeu;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Cette classe représente une transition disponible entre des états du jeu.
  */
-public abstract class Transition {
+public abstract class Transition implements Serializable {
 
+	private static final long serialVersionUID = 7111721649440666679L;
 	protected Etat etatEntree;
 	protected List<Etat> etatSortie;
 	protected ContextJeu contextDuJeu;
 	protected Sequence sequence;
 	
+	/**
+	 * Crée une transition en l'ajoutant automatiquement à son état d'entrée.
+	 * 
+	 * @param context le contexte du jeu auquel auquel appartient la transition.
+	 * @param s la sequence contenant l'arbre d'état transition contenant cette transition.
+	 * @param entree l'état en entrée de la transition.
+	 */
 	public Transition(ContextJeu context, Sequence s, Etat entree) {
+		this(context, s, entree, true);
+	}
+
+	/**
+	 * Crée une transition.
+	 * 
+	 * @param context le contexte du jeu auquel auquel appartient la transition.
+	 * @param s la sequence contenant l'arbre d'état transition contenant cette transition.
+	 * @param entree l'état en entrée de la transition.
+	 * @param addToEntree true pour que la transition s'ajoute automatiquement à l'état d'entrée.
+	 */
+	public Transition(ContextJeu context, Sequence s, Etat entree, boolean addToEntree) {
 		contextDuJeu = context;
 		sequence = s;
 		etatSortie = new LinkedList<Etat>();
 		etatEntree = entree;
+		if(addToEntree)
+			etatEntree.add(this);
 	}
 	
 	public Etat getEtatEntree() {
