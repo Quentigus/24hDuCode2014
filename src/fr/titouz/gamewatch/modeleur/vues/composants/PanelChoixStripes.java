@@ -44,7 +44,7 @@ public class PanelChoixStripes extends JPanel {
 		for (BufferedImage im : lesImages) {
 			BoutonSprite bouton = new BoutonSprite(im);
 			
-			bouton.setText(im.getWidth() + "x" + im.getHeight());
+			
 			this.groupe.add(bouton);
 			
 			this.add(bouton);

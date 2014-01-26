@@ -16,5 +16,6 @@ public class BoutonSprite extends JToggleButton {
 		this.setVerticalTextPosition(SwingConstants.BOTTOM);
 		this.setHorizontalTextPosition(SwingConstants.CENTER);
 		this.setIcon(new ImageIcon(ImagesHelper.resizeImg(pImage, 35, 35)));
+		this.setText(pImage.getWidth() + "x" + pImage.getHeight());
 	}
 }

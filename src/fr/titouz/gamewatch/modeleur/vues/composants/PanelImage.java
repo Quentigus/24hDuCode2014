@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public class PanelImage extends JPanel {
 
 	private static final long serialVersionUID = 3530809267375791882L;
-	private BufferedImage image;
+	protected BufferedImage image;
 
 	public PanelImage() { }
 	
@@ -21,10 +21,14 @@ public class PanelImage extends JPanel {
 		this.image = pImage;
 		this.setPreferredSize(new Dimension(this.image.getWidth(), this.image.getHeight()));
 	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
 	
 	public void setImage(String url) {
 		try {
-			this.image = ImageIO.read(new URL("file:\\C:\\Users\\quent_000\\Desktop\\1.png"));
+			this.image = ImageIO.read(new URL("file:\\"+url));
 			this.setPreferredSize(new Dimension(this.image.getWidth(), this.image.getHeight()));
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
