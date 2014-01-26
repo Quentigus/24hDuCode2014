@@ -7,6 +7,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
 
 public class PanelChoixStripes extends JPanel {
 
@@ -22,5 +24,15 @@ public class PanelChoixStripes extends JPanel {
 			this.groupe.add(bouton);
 			this.add(bouton);
 		}
+	}
+	public BufferedImage getSelectedSprite(){
+		Enumeration<AbstractButton> elem = groupe.getElements();
+		while(elem.hasMoreElements()){
+			BoutonSprite spr = (BoutonSprite)(elem.nextElement());
+			if(spr.isSelected()){
+				return spr.getSelectedSprite();
+			}
+		}
+		return null;
 	}
 }
