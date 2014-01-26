@@ -1,10 +1,12 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -21,38 +23,21 @@ import javax.swing.JScrollPane;
  */
 public class ScrollPaneSelection extends JScrollPane {
 
-	private Point ptClick;
-
-	private Point ptDrag;
-
 	private JPanel panelSprites;
 
-	private JLabel lab;
+	private PanelImagePeignable pan;
 
 	private BufferedImage img;
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		if (ptClick != null) {
-			g2d.setColor(Color.red);
-			System.out.println("la");
-			//g2d.fillRect((int) (ptClick.getX()), (int) (ptClick.getY()), (int) (ptDrag.getX() - ptClick.getX()), (int) (ptDrag.getY() - ptClick.getY()));
-			g2d.fillRect((int) (ptClick.getX()), (int) (ptClick.getY()), 50, 50);
-		}
-	}
-
+	
 	/**
 	 * Default constructor of
 	 * <code>ScrollPaneSelection</code>.
 	 */
-	public ScrollPaneSelection(BufferedImage img, JPanel panelSprites) {
-		super(new JLabel(new ImageIcon(img)));
-
+	public ScrollPaneSelection(PanelImagePeignable pan, JPanel panelSprites) {
+		super(pan);
+		this.img = pan.getImage();
 		//this.add(lab);
-		this.lab = new JLabel(new ImageIcon(img));
-		this.img = img;
+		this.pan = pan;
 		this.panelSprites = panelSprites;
 		this.addMouseListener(new MouseAdapter() {
 			@Override
@@ -64,11 +49,36 @@ public class ScrollPaneSelection extends JScrollPane {
 			public void mouseReleased(MouseEvent e) {
 				relacheSouris(e);
 			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+
+				setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+    cursorImg, new Point(0, 0), "blank cursor"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				setCursor(Cursor.getDefaultCursor());
+			}
+			
+			
+			
 		});
 		this.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				super.mouseDragged(e);
+				dragSouris(e);
+			}
+			
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				super.mouseMoved(e);
 				dragSouris(e);
 			}
 		});
@@ -77,9 +87,8 @@ public class ScrollPaneSelection extends JScrollPane {
 	}
 
 	private void cliqueSouris(MouseEvent e) {
-		ptClick = e.getPoint();
-		ptDrag = e.getPoint();
-		System.out.println(ptClick);
+		pan.setPtClick(e.getPoint());
+		pan.setPtDrag(e.getPoint());
 
 		this.repaint();
 
@@ -87,35 +96,21 @@ public class ScrollPaneSelection extends JScrollPane {
 
 	private void relacheSouris(MouseEvent e) {
 		System.out.println("relache");
-		BufferedImage sub;
-		if (!(ptClick.getX() == ptDrag.getX() && ptClick.getY() == ptDrag.getY())) {
-			if (ptClick.getX() < ptDrag.getX() && ptClick.getY() < ptDrag.getY()) {
-				sub = img.getSubimage((int) ptClick.getX(), (int) ptClick.getY(), (int) (ptDrag.getX() - ptClick.getX()), (int) (ptDrag.getY() - ptClick.getY()));
-			}
-			else if (ptClick.getX() < ptDrag.getX() && ptClick.getY() >= ptDrag.getY()) {
-				sub = img.getSubimage((int) ptClick.getX(), (int) ptDrag.getY(), (int) (ptDrag.getX() - ptClick.getX()), (int) (ptClick.getY() - ptDrag.getY()));
-			}
-			else if (ptClick.getX() >= ptDrag.getX() && ptClick.getY() >= ptDrag.getY()) {
-				sub = img.getSubimage((int) ptDrag.getX(), (int) ptDrag.getY(), (int) (ptClick.getX() - ptDrag.getX()), (int) (ptClick.getY() - ptDrag.getY()));
-			}
-			else {
-				sub = img.getSubimage((int) ptDrag.getX(), (int) ptClick.getY(), (int) (ptClick.getX() - ptDrag.getX()), (int) (ptDrag.getY() - ptClick.getY()));
-			}
-			ptClick = null;
-			ptDrag = null;
+		BufferedImage sub = pan.getSubImage();
+		if(sub != null){
 			this.repaint();
-			this.panelSprites.add(new JButton(new ImageIcon(sub)));
+			this.panelSprites.add(new BoutonSprite(sub));
 			this.panelSprites.revalidate();
 			this.panelSprites.repaint();
 		}
 	}
 
 	private void dragSouris(MouseEvent e) {
-		System.out.println(ptDrag);
-		ptDrag = e.getPoint();
-		System.out.println("----");
-		System.out.println(ptClick);
-		System.out.println(ptDrag);
+		pan.setPtDrag(e.getPoint());
 		this.repaint();
+	}
+
+	public PanelImagePeignable getPan() {
+		return pan;
 	}
 }
