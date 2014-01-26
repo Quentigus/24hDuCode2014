@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -25,8 +25,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JPanel;
-
-import test.TestJeu.TabAffListener;
 
 import fr.titouz.gamewatch.emulateur.controller.MainController;
 import fr.titouz.gamewatch.jeu.Etat;
