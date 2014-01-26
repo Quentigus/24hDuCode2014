@@ -5,11 +5,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
 import javax.swing.JPanel;
 
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
@@ -24,7 +20,7 @@ public class DecoupeurFond extends JPanel {
 	public DecoupeurFond() {
 		this.setLayout(new BorderLayout());
 		
-		this.panel = new PanelImage();
+		this.panel = new PanelImage(-1);
 		this.panel.setAfficherEcran(true);
 		
 		this.panel.ajouterListener(new MouseAdapter() {

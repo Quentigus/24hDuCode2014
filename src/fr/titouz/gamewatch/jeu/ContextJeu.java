@@ -16,13 +16,15 @@
 
 package fr.titouz.gamewatch.jeu;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Cette classe contient l'état des éléments généraux d'un jeu.
  */
-public class ContextJeu {
+public class ContextJeu implements Serializable {
+	private static final long serialVersionUID = 7979879589240342453L;
 	private Map<String, Boolean> etatsTouches;
 	
 	public ContextJeu() {

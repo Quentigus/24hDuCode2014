@@ -1,24 +1,37 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
+import fr.titouz.gamewatch.modeleur.modele.Sprite;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import javax.swing.JPanel;
 
 public class PanelImage extends JPanel {
 
 	private static final long serialVersionUID = 3530809267375791882L;
+
 	protected BufferedImage image;
+
 	private boolean afficherTailleEcran = false;
+
 	private int decalageHorizontal = 0;
+
 	private int decalageVertical = 0;
+
 	private Point ancienPtDrag = null;
 
-	public PanelImage() { }
+	private int typeSprite;
+
+	public PanelImage(int typeSprite) {
+		this.typeSprite = typeSprite;
+	}
 
 	public PanelImage(BufferedImage pImage) {
 		this.image = pImage;
@@ -36,23 +49,24 @@ public class PanelImage extends JPanel {
 	public void setImage(BufferedImage img) {
 		this.image = img;
 		this.setPreferredSize(new Dimension(this.image.getWidth(), this.image.getHeight()));
-		
+
 		this.repaint();
 		this.validate();
 	}
 
 	public void setDecalages(Point ptClick, Point ptDrag) {
-		// Décalage du drag
-		int decX ;
-		int decY ;
-		if(ancienPtDrag == null){
-			decX = (int)(ptDrag.getX() - ptClick.getX());
-			decY = (int)(ptDrag.getY() - ptClick.getY());
-		}else{
-			decX = (int)((ptDrag.getX() - ancienPtDrag.getX()));
-			decY = (int)((ptDrag.getY() - ancienPtDrag.getY()));
+		// Dï¿½calage du drag
+		int decX;
+		int decY;
+		if (ancienPtDrag == null) {
+			decX = (int) (ptDrag.getX() - ptClick.getX());
+			decY = (int) (ptDrag.getY() - ptClick.getY());
 		}
-		
+		else {
+			decX = (int) ((ptDrag.getX() - ancienPtDrag.getX()));
+			decY = (int) ((ptDrag.getY() - ancienPtDrag.getY()));
+		}
+
 		int decalagePossibleX = this.decalageHorizontal - decX;
 		int decalagePossibleY = this.decalageVertical - decY;
 
@@ -62,14 +76,14 @@ public class PanelImage extends JPanel {
 		}
 		if (decalagePossibleY >= 0 && decalagePossibleY < this.image.getHeight() - 350) {
 			this.decalageVertical = decalagePossibleY;
-			ancienPtDrag = ptDrag;	
+			ancienPtDrag = ptDrag;
 		}
 
 		this.repaint();
 		this.validate();
 	}
-	
-	public void resetAncienPtDrag(){
+
+	public void resetAncienPtDrag() {
 		ancienPtDrag = null;
 	}
 
@@ -98,8 +112,17 @@ public class PanelImage extends JPanel {
 			}
 			else {
 				g.drawImage(image, 0, 0, null);
+				
+				for (Sprite s : Jeu.getInstance().getLesFixes()) {
+					((Graphics2D) g).drawImage(s.getImage(), null, (int) s.getCoordonnees().getX(), (int) s.getCoordonnees().getY());
+				}
+				for (Sprite s : Jeu.getInstance().getLesPersonnages()) {
+					((Graphics2D) g).drawImage(s.getImage(), null, (int) s.getCoordonnees().getX(), (int) s.getCoordonnees().getY());
+				}
+				for (Sprite s : Jeu.getInstance().getLesEnnemies()) {
+					((Graphics2D) g).drawImage(s.getImage(), null, (int) s.getCoordonnees().getX(), (int) s.getCoordonnees().getY());
+				}
 			}
 		}
 	}
-
 }
