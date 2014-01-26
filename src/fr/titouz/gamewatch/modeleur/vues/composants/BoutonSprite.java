@@ -1,5 +1,6 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -16,5 +17,6 @@ public class BoutonSprite extends JToggleButton {
 		this.setVerticalTextPosition(SwingConstants.BOTTOM);
 		this.setHorizontalTextPosition(SwingConstants.CENTER);
 		this.setIcon(new ImageIcon(ImagesHelper.resizeImg(pImage, 35, 35)));
+		this.setPreferredSize(new Dimension(90, 70));
 	}
 }
