@@ -23,16 +23,13 @@ public class ScrollPaneSelection extends JScrollPane {
 
 	private PanelImagePeignable pan;
 
-	private BufferedImage img;
-	
 	/**
 	 * Default constructor of
 	 * <code>ScrollPaneSelection</code>.
 	 */
 	public ScrollPaneSelection(PanelImagePeignable pan, JPanel panelSprites) {
 		super(pan);
-		this.img = pan.getImage();
-		//this.add(lab);
+
 		this.pan = pan;
 		this.panelSprites = panelSprites;
 		this.addMouseListener(new MouseAdapter() {
@@ -91,7 +88,6 @@ public class ScrollPaneSelection extends JScrollPane {
 	}
 
 	private void relacheSouris(MouseEvent e) {
-		System.out.println("relache");
 		BufferedImage sub = pan.getSubImage();
 		if(sub != null){
 			// Ajout de l'image dans le modele

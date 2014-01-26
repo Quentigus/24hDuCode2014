@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,27 +25,27 @@ public class PanelConfigurationFond extends JPanel {
 		
 		this.decoupeur = new DecoupeurFond();
 		
-		this.add(new ChargerFond(
-				new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// Parcourir
-						JFileChooser chooser = new JFileChooser();
-						FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
-						chooser.setFileFilter(filter);
-						int returnVal = chooser.showOpenDialog(self);
-						if (returnVal == JFileChooser.APPROVE_OPTION) {
-							try {
-								Jeu.getInstance().setFond(ImageIO.read(new File(chooser.getSelectedFile().getPath())));
-								decoupeur.updateImage();
-							} catch (IOException ex) {
-								ex.printStackTrace();
-							}
-						}
+		JButton parcourir = new JButton("Parcourir ...");
+		parcourir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Parcourir
+				JFileChooser chooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+				chooser.setFileFilter(filter);
+				int returnVal = chooser.showOpenDialog(self);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					try {
+						Jeu.getInstance().setFond(ImageIO.read(new File(chooser.getSelectedFile().getPath())));
+						decoupeur.updateImage();
+					} catch (IOException ex) {
+						ex.printStackTrace();
 					}
 				}
-			), BorderLayout.NORTH);
+			}
+		});
+		this.add(parcourir, BorderLayout.NORTH);
 		this.add(this.decoupeur, BorderLayout.CENTER);
 	}
 }
