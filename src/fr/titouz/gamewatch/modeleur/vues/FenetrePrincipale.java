@@ -48,7 +48,7 @@ public class FenetrePrincipale extends JFrame {
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 			this.setLayout(new BorderLayout());
-			JLabel topLabel = new JLabel("Assistant cr�ation de jeu Titz & Watch");
+			JLabel topLabel = new JLabel("Assistant création de jeu Titz & Watch");
 			topLabel.setFont(new Font(topLabel.getFont().getFontName(), Font.BOLD, 20));
 			topLabel.setIcon(ImagesHelper.getIcon("ressources/wizard-icon.png"));
 			topLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -59,7 +59,7 @@ public class FenetrePrincipale extends JFrame {
 
 			this.add(panelPrincipal, BorderLayout.CENTER);
 
-			this.labelEtape = new JLabel("Bienvenue sur le g�n�rateur de Titz & Watch");
+			this.labelEtape = new JLabel("Bienvenue sur le générateur de Titz & Watch");
 			this.labelEtape.setFont(new Font(this.labelEtape.getFont().getFontName(), Font.BOLD, 17));
 			
 			this.panelPrincipal.add(this.labelEtape, BorderLayout.NORTH);
@@ -93,7 +93,7 @@ public class FenetrePrincipale extends JFrame {
 		
 		switch (indexEtape) {
 		case 1:
-			this.labelEtape.setText("Etape 1 : D�coupage des ic�nes");
+			this.labelEtape.setText("Etape 1 : Découpage des icônes");
 			aAfficher =  new DecoupeurSprites();
 			break;
 		case 2:
@@ -101,15 +101,15 @@ public class FenetrePrincipale extends JFrame {
 			aAfficher = new PanelConfigurationFond();
 			break;
 		case 3 :
-			this.labelEtape.setText("Etape 3 : Positionnement des ic�nes des objets fixes");
+			this.labelEtape.setText("Etape 3 : Positionnement des icônes des objets fixes");
 			aAfficher = new PositionnementSprite(1);
 			break;
 		case 4: 
-			this.labelEtape.setText("Etape 4 : Positionnement des ic�nes du personnage");
+			this.labelEtape.setText("Etape 4 : Positionnement des icônes du personnage");
 			aAfficher = new PositionnementSprite(2);
 			break;
 		case 5:
-			this.labelEtape.setText("Etape 5 : Positionnement de ic�nes des ennemis");
+			this.labelEtape.setText("Etape 5 : Positionnement de icônes des ennemis");
 			aAfficher = new PositionnementSprite(3);
 			break;
 		case 6:
@@ -121,12 +121,12 @@ public class FenetrePrincipale extends JFrame {
 			aAfficher = new SequenceSprite(2);
 			break;
 		case 8:
-			try {
+			//try {
 				this.labelEtape.setText("Etape 8 : Sauvegarde des informations");
-				aAfficher = new PanelImage(ImageIO.read(new File("ressources/screen_home.png")));
+				aAfficher = new PanelImage(Jeu.getInstance().getFond());//ImageIO.read(new File("ressources/screen_home.png")));
 				FileOutputStream fichier;
 				try {
-					fichier = new FileOutputStream("test.titz");
+					fichier = new FileOutputStream("C:\\titzwatch\\nouveau_jeu.titz");
 					ObjectOutputStream oos = new ObjectOutputStream(fichier);
 					oos.writeObject(Jeu.getInstance());
 					oos.flush();
@@ -138,9 +138,9 @@ public class FenetrePrincipale extends JFrame {
 				} catch (IOException e) {
 					Logger.getLogger(FenetrePrincipale.class.getName()).log(Level.SEVERE, null, e);
 				}
-			} catch (IOException e1) {
+			/*} catch (IOException e1) {
 				e1.printStackTrace();
-			}
+			}*/
 			break;
 		}
 		this.panelPrincipal.removeAll();
