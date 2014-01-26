@@ -16,30 +16,12 @@
 
 package fr.titouz.gamewatch.jeu;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * Cette classe contient l'état des éléments généraux d'un jeu.
+ * Interface pour les objets souhaitant être notifier de la fin de chaque tour de jeu.
  */
-public class ContextJeu {
-	private Map<String, Boolean> etatsTouches;
-	
-	public ContextJeu() {
-		etatsTouches = new HashMap<String, Boolean>();
-		initTouchMap();
-	}
-	
-	private void initTouchMap() {
-		etatsTouches.put("droite", false);
-		etatsTouches.put("gauche", false);
-	}
-
-	public Map<String, Boolean> getEtatsTouches() {
-		return etatsTouches;
-	}
-
-	public void setEtatsTouches(Map<String, Boolean> etatsTouches) {
-		this.etatsTouches = etatsTouches;
-	}
+public interface TourDeJeuListener {
+	/**
+	 * Lance la notification des écouteurs de tour de jeu.
+	 */
+	public void notifier();
 }

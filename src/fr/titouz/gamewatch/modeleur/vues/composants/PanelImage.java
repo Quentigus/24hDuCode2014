@@ -16,11 +16,10 @@ import javax.swing.JPanel;
 public class PanelImage extends JPanel {
 
 	private static final long serialVersionUID = 3530809267375791882L;
-	private BufferedImage image;
+	protected BufferedImage image;
 	private boolean afficherTailleEcran = false;
 	private int decalageHorizontal = 0;
 	private int decalageVertical = 0;
-
 	private Point ancienPtDrag = null;
 
 	public PanelImage() { }

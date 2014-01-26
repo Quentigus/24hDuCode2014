@@ -22,25 +22,34 @@ import fr.titouz.gamewatch.jeu.Sequence;
 import fr.titouz.gamewatch.jeu.Transition;
 
 /**
- * Transition s'activant si la touche gauche est activée.
+ * Cette classe représente une transition aléatoire d'un état vers d'autres. 
  */
-public class TransitionToucheGauche extends Transition {
-	
-	private static final long serialVersionUID = -6547662984045438949L;
+public class TransitionAleatoire extends Transition {
 
-	public TransitionToucheGauche(ContextJeu context, Sequence s, Etat entree) {
+	private static final long serialVersionUID = 4558292850976738578L;
+
+	/**
+	 * Crée une transition aléatoire.
+	 * 
+	 * @param context le contexte du jeu conteant la transition
+	 * @param s la sequence contenant la transition
+	 * @param entree l'état en entrée de la transition
+	 */
+	public TransitionAleatoire(ContextJeu context, Sequence s, Etat entree) {
 		super(context, s, entree);
 	}
-
+	
 	@Override
 	public void suivant() {
-		if(this.contextDuJeu.getEtatsTouches().get("gauche")) {
-			this.etatEntree.setActif(false);
-			this.sequence.getEtatsCourants().remove(etatEntree);
-			for(Etat e: this.etatSortie) {
-				e.setActif(true);
-				this.sequence.getEtatsCourants().add(e);
-			}
+		this.etatEntree.setActif(false);
+		this.sequence.getEtatsCourants().remove(etatEntree);
+		int nbEtatSortie = this.etatSortie.size();
+		if(nbEtatSortie > 0) {
+			int choix = (int)(Math.random() * nbEtatSortie);
+			Etat e = etatSortie.get(choix);
+			e.setActif(true);
+			this.sequence.getEtatsCourants().add(e);
 		}
 	}
+
 }

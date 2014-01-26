@@ -13,6 +13,7 @@ import fr.titouz.gamewatch.modeleur.vues.composants.fond.ChargerFond;
 import fr.titouz.gamewatch.modeleur.vues.composants.fond.DecoupeurFond;
 import fr.titouz.gamewatch.modeleur.vues.composants.sprites.PositionnementSprite;
 
+
 public class FenetrePrincipale extends JFrame {
 
 	private static final long serialVersionUID = 3189376456185578145L;
