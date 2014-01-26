@@ -16,26 +16,30 @@
 
 package fr.titouz.gamewatch.modeleur.modele;
 
-import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-public class Sprite implements Serializable {
+public class GTransition implements Serializable {
 
-	private static final long serialVersionUID = 8449098848147438233L;
-	private Point coordonnees;
-	private BufferedImage image;
+	private static final long serialVersionUID = 5596002822836246892L;
+	private Sprite initial;
+	private Sprite destination;
+	private String condition;
 	
-	public Sprite(Point coordonnees, BufferedImage image) {
-		this.coordonnees = coordonnees;
-		this.image = image;
+	public GTransition(Sprite pInitial, Sprite pDestination, String pCondition) {
+		this.initial = pInitial;
+		this.destination = pDestination;
+		this.condition = pCondition;
 	}
 
-	public Point getCoordonnees() {
-		return coordonnees;
+	public Sprite getInitial() {
+		return initial;
 	}
 
-	public BufferedImage getImage() {
-		return image;
+	public Sprite getDestination() {
+		return destination;
+	}
+
+	public String getCondition() {
+		return condition;
 	}
 }

@@ -19,6 +19,7 @@ package fr.titouz.gamewatch.emulateur.controller;
 import java.io.File;
 import java.util.List;
 
+import fr.titouz.gamewatch.emulateur.view.MainPanel;
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
 import fr.titouz.gamewatch.tools.Repertoire;

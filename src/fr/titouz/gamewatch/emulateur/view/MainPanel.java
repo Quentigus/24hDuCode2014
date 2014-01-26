@@ -27,6 +27,7 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import fr.titouz.gamewatch.emulateur.controller.MainController;
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.common.LeftBarPanel;
 import fr.titouz.gamewatch.emulateur.view.common.RightBarPanel;
@@ -37,7 +38,8 @@ public class MainPanel extends JPanel{
 
 	private static MainPanel instance;
 	private Image img;
-	private String url_fond = "ressources/fond.png";
+	private String url_fond_off = "ressources/fond.png";
+	private String url_fond_on = "ressources/fondJeu.png";
 
 	private MainPanel() {
 		
@@ -65,7 +67,8 @@ public class MainPanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		try {
-			this.img = ImagesHelper.getImage(this.url_fond);
+			this.img = ImagesHelper.getImage(this.url_fond_on);
+			
 			if(this.img != null) {
 				g.drawImage(this.img,0,0,this);
 			}
