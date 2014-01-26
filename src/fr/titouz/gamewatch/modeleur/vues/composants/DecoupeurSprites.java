@@ -1,24 +1,19 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -27,10 +22,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class DecoupeurSprites extends JPanel {
 	
+	private static final long serialVersionUID = -8188541086512216388L;
 	private JButton boutChoixIm;
-	
 	private ScrollPaneSelection jsp = null;
-	
 	private JPanel panelSprites;
 
 	/**
@@ -77,7 +71,7 @@ public class DecoupeurSprites extends JPanel {
 				jsp = new ScrollPaneSelection(new PanelImagePeignable(ImageIO.read(new File(imgPath))), panelSprites);
 			}
 			else {
-				jsp.getPan().setImage(imgPath);
+				jsp.getPan().setImage(ImageIO.read(new File(imgPath)));
 			}
 			this.add(jsp, BorderLayout.CENTER);
 			this.validate();

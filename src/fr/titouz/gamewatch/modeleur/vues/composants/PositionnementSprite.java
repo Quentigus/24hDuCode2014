@@ -1,13 +1,10 @@
-package fr.titouz.gamewatch.modeleur.vues.composants.sprites;
+package fr.titouz.gamewatch.modeleur.vues.composants;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
-import fr.titouz.gamewatch.modeleur.vues.composants.PanelChoixStripes;
-import fr.titouz.gamewatch.modeleur.vues.composants.PanelEcran;
 
 public class PositionnementSprite extends JPanel {
 

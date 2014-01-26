@@ -1,15 +1,14 @@
-package fr.titouz.gamewatch.modeleur.vues.composants.fond;
+package fr.titouz.gamewatch.modeleur.vues.composants;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import fr.titouz.gamewatch.modeleur.vues.composants.PanelImage;
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
 
 
 public class DecoupeurFond extends JPanel {
@@ -18,10 +17,10 @@ public class DecoupeurFond extends JPanel {
 	private PanelImage panel;
 	private Point click;
 	
-	public DecoupeurFond(BufferedImage pImage) {
+	public DecoupeurFond() {
 		this.setLayout(new BorderLayout());
 		
-		this.panel = new PanelImage(pImage);
+		this.panel = new PanelImage();
 		this.panel.setAfficherEcran(true);
 		
 		this.panel.ajouterListener(new MouseAdapter() {
@@ -42,12 +41,16 @@ public class DecoupeurFond extends JPanel {
 			
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
 				panel.setDecalages(click, e.getPoint());
 			}
 		});
 
-
 		this.add(this.panel, BorderLayout.CENTER);
+	}
+	
+	public void updateFond() {
+		if (Jeu.getInstance().getFond() != null) {
+			this.panel.setImage(Jeu.getInstance().getFond());
+		}
 	}
 }
