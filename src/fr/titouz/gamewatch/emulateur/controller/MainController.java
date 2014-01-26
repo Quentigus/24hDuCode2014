@@ -17,11 +17,13 @@
 package fr.titouz.gamewatch.emulateur.controller;
 
 import fr.titouz.gamewatch.emulateur.view.MainFrame;
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
 
 public class MainController {
 	
 	private static MainController instance;
 	private boolean gameIsOn = false;
+	private Jeu jeuCourant;
 
 	private MainController() {
 	}
@@ -44,9 +46,11 @@ public class MainController {
 		return this.gameIsOn;
 	}
 
-	public void launchGame() {
+	public void launchGame(Jeu jeu) {
 		// TODO Auto-generated method stub
 		this.gameIsOn = true;
+		this.jeuCourant = jeu;
 	}
+	
 
 }

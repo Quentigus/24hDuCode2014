@@ -17,11 +17,16 @@
 package fr.titouz.gamewatch.emulateur.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 
 import fr.titouz.gamewatch.emulateur.view.MainPanel;
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.tools.Repertoire;
 
 public class ControlController {
@@ -48,16 +53,31 @@ public class ControlController {
 
 	public void enterListControl(String selectedValue) {
 		if(selectedValue != null && !MainController.getInstance().isGameOn()) {
-			String url = "C:\\"+selectedValue.replaceAll(" ", "_")+".titz";
-			chargerJeu(url);
-			MainController.getInstance().launchGame();
+			String url = "C:\\titzwatch\\"+selectedValue.replaceAll(" ", "_")+".titz";
+			
+			MainController.getInstance().launchGame(chargerJeu(url));
 			CenterPanel.getInstance().changerEcranToGame();
+			MainPanel.getInstance().repaint();
 		}
 		
 	}
 	
-	private void chargerJeu(String url) {
-		File f = new File(url);
+	private Jeu chargerJeu(String url) {
+		Jeu j = null;
+		try {
+			
+			File f = new File(url);
+			FileInputStream fis = new FileInputStream(f);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			j = (Jeu) ois.readObject();
+			ois.close();
+			fis.close();
+		} catch (IOException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return j;
 		
 	}
 

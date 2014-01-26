@@ -67,7 +67,7 @@ public class MainPanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		try {
-			this.img = ImagesHelper.getImage(this.url_fond_on);
+			this.img = ImagesHelper.getImage(this.url_fond_off);
 			
 			if(this.img != null) {
 				g.drawImage(this.img,0,0,this);
