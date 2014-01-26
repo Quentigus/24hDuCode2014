@@ -28,6 +28,7 @@ public class Etat implements Iterable<Transition>, Serializable {
 	private static final long serialVersionUID = -754985720427205694L;
 	private List<Transition> transitions;
 	private boolean actif;
+	private Etat ancienEtat;
 	
 	/**
 	 * Crée un état sans transition et désactivé.
@@ -44,6 +45,7 @@ public class Etat implements Iterable<Transition>, Serializable {
 	public Etat(boolean active) {
 		transitions = new LinkedList<Transition>();
 		actif = active;
+		ancienEtat = null;
 	}
 	
 	/**
@@ -123,5 +125,13 @@ public class Etat implements Iterable<Transition>, Serializable {
 
 	public void setActif(boolean actif) {
 		this.actif = actif;
+	}
+
+	public Etat getAncienEtat() {
+		return ancienEtat;
+	}
+
+	public void setAncienEtat(Etat ancienEtat) {
+		this.ancienEtat = ancienEtat;
 	}
 }

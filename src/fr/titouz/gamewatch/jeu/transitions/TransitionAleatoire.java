@@ -48,6 +48,7 @@ public class TransitionAleatoire extends Transition {
 			int choix = (int)(Math.random() * nbEtatSortie);
 			Etat e = etatSortie.get(choix);
 			e.setActif(true);
+			e.setAncienEtat(etatEntree);
 			this.sequence.getEtatsCourants().add(e);
 		}
 	}
