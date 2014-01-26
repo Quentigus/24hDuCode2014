@@ -21,18 +21,18 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 import fr.titouz.gamewatch.jeu.Etat;
-import fr.titouz.gamewatch.tools.ImageSerialisable;
+import fr.titouz.gamewatch.tools.ImageSerialisable2;
 
 public class Sprite implements Serializable {
 
 	private static final long serialVersionUID = 8449098848147438233L;
 	private Point coordonnees;
-	private ImageSerialisable image;
+	private ImageSerialisable2 image;
 	private Etat etat;
 	
 	public Sprite(Point coordonnees, BufferedImage image) {
 		this.coordonnees = coordonnees;
-		this.image = new ImageSerialisable(image);
+		this.image = new ImageSerialisable2(image);
 		this.etat = null;
 	}
 
@@ -41,7 +41,7 @@ public class Sprite implements Serializable {
 	}
 
 	public BufferedImage getImage() {
-		return image.getImage();
+		return this.image.get();
 	}
 	
 	/**

@@ -25,6 +25,7 @@ import java.util.List;
 
 import fr.titouz.gamewatch.emulateur.view.MainPanel;
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
+import fr.titouz.gamewatch.emulateur.view.game.GamePanel;
 import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.tools.Repertoire;
@@ -58,6 +59,7 @@ public class ControlController {
 			MainController.getInstance().launchGame(chargerJeu(url));
 			CenterPanel.getInstance().changerEcranToGame();
 			MainPanel.getInstance().repaint();
+			GamePanel.getInstance().jouerBasicJeu();
 		}
 		
 	}
