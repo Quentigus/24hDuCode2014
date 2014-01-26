@@ -27,12 +27,19 @@ import fr.titouz.gamewatch.emulateur.view.MainPanel;
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.game.GamePanel;
 import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
+import fr.titouz.gamewatch.jeu.Etat;
+import fr.titouz.gamewatch.jeu.Sequence;
+import fr.titouz.gamewatch.jeu.TourDeJeuListener;
+import fr.titouz.gamewatch.jeu.Transition;
+import fr.titouz.gamewatch.jeu.transitions.TransitionToucheGauche;
+import fr.titouz.gamewatch.modeleur.modele.GTransition;
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.tools.Repertoire;
 
 public class ControlController {
 
 	private static ControlController instance;
+	private fr.titouz.gamewatch.jeu.Jeu jeu;
 
 	private ControlController() {
 	}
@@ -59,9 +66,57 @@ public class ControlController {
 			MainController.getInstance().launchGame(chargerJeu(url));
 			CenterPanel.getInstance().changerEcranToGame();
 			MainPanel.getInstance().repaint();
-			GamePanel.getInstance().jouerBasicJeu();
+			chargeEtLanceModelJeu();
+			//GamePanel.getInstance().jouerBasicJeu();
 		}
 		
+	}
+	
+	private void chargeEtLanceModelJeu() {
+		Jeu j = MainController.getInstance().getJeu();
+		jeu = new fr.titouz.gamewatch.jeu.Jeu();
+		for(GTransition gt : j.getLesSequences()) {	
+			Etat init = new Etat();
+			init.setActif(true);
+			Etat fin = new Etat();
+			Sequence s = new Sequence(init);
+			jeu.getSequences().add(s);
+			
+			gt.getInitial().setEtat(init);
+			gt.getDestination().setEtat(fin);
+			if(gt.getCondition().equals("gauche")) {
+				Transition t = new TransitionToucheGauche(jeu.getContext(), s, init);
+				t.getEtatSortie().add(fin);
+			}
+		}
+		
+		TourDeJeuListener listener = new TourDeJeuListener() {
+			@Override
+			public void notifier() {
+				GamePanel.getInstance().repaint();
+				GamePanel.getInstance().validate();
+			}
+		};
+		
+		
+		jeu.addTourDeJeuListener(listener);
+		listener.notifier();
+		jeu.jouer();
+		Thread thrd = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					System.err.println("Thread attente testJouer interrompu.");
+				}
+				jeu.stop();
+				
+			}
+			
+		});
+		thrd.start();
 	}
 	
 	private Jeu chargerJeu(String url) {
