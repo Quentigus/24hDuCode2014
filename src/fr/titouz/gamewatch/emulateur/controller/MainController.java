@@ -51,6 +51,11 @@ public class MainController {
 		this.gameIsOn = true;
 		this.jeuCourant = jeu;
 	}
+
+	public Jeu getJeu() {
+		// TODO Auto-generated method stub
+		return jeuCourant;
+	}
 	
 
 }
