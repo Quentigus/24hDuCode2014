@@ -85,11 +85,11 @@ public class Jeu implements Serializable {
 		this.lesPersonnages.add(personnage);
 	}
 
-	public ArrayList<Sequence> getLesSequences() {
+	public ArrayList<GTransition> getLesSequences() {
 		return lesSequences;
 	}
 
-	public void ajouterSequence(Sequence sequence) {
+	public void ajouterSequence(GTransition sequence) {
 		this.lesSequences.add(sequence);
 	}
 
