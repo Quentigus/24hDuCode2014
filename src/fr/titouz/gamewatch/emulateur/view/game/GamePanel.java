@@ -83,6 +83,16 @@ public class GamePanel extends JPanel{
 					g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
 				}
 			}
+			for(Sprite s: j.getLesEnnemies()) {
+				if(s.isVisible()) {
+					g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
+				}
+			}
+			for(Sprite s: j.getLesFixes()) {
+				if(s.isVisible()) {
+					g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
+				}
+			}
 		}
 	}
 	

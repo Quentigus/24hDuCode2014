@@ -20,13 +20,13 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.titouz.gamewatch.tools.ImageSerialisable;
+import fr.titouz.gamewatch.tools.ImageSerialisable2;
 
 public class Jeu implements Serializable {
 
 	private static final long serialVersionUID = -3149764703072717787L;
 	private static final Jeu instance = new Jeu();
-	private ImageSerialisable fond;
+	private ImageSerialisable2 fond;
 	private String nom;
 	private ArrayList<Sprite> lesEnnemies;
 	private ArrayList<Sprite> lesFixes;
@@ -41,7 +41,7 @@ public class Jeu implements Serializable {
 		this.nom = nom;
 	}
 	
-	private ArrayList<ImageSerialisable> lesSpritesDecoupes;
+	private ArrayList<ImageSerialisable2> lesSpritesDecoupes;
 	
 	private Jeu() {
 		this.lesEnnemies = new ArrayList<>();
@@ -56,13 +56,11 @@ public class Jeu implements Serializable {
 	}
 	
 	public BufferedImage getFond() {
-		if(fond == null)
-			return null;
-		return fond.getImage();
+		return this.fond.get();
 	}
 	
 	public void setFond(BufferedImage fond) {
-		this.fond = new ImageSerialisable(fond);
+		this.fond = new ImageSerialisable2(fond);
 	}
 	
 	public ArrayList<Sprite> getLesEnnemies() {
@@ -99,13 +97,13 @@ public class Jeu implements Serializable {
 
 	public ArrayList<BufferedImage> getLesSpritesDecoupes() {
 		ArrayList<BufferedImage> liste = new ArrayList<>();
-		for (ImageSerialisable im : lesSpritesDecoupes) {
-			liste.add(im.getImage());
+		for (ImageSerialisable2 im : lesSpritesDecoupes) {
+			liste.add(im.get());
 		}
 		return liste;
 	}
 
 	public void ajouterSpriteDecoupe(BufferedImage sprite) {
-		this.lesSpritesDecoupes.add(new ImageSerialisable(sprite));
+		this.lesSpritesDecoupes.add(new ImageSerialisable2(sprite));
 	}
 }
