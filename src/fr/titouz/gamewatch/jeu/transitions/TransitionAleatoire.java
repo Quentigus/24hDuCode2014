@@ -16,6 +16,8 @@
 
 package fr.titouz.gamewatch.jeu.transitions;
 
+import java.util.Random;
+
 import fr.titouz.gamewatch.jeu.ContextJeu;
 import fr.titouz.gamewatch.jeu.Etat;
 import fr.titouz.gamewatch.jeu.Sequence;
@@ -45,7 +47,7 @@ public class TransitionAleatoire extends Transition {
 		this.sequence.getEtatsCourants().remove(etatEntree);
 		int nbEtatSortie = this.etatSortie.size();
 		if(nbEtatSortie > 0) {
-			int choix = (int)(Math.random() * nbEtatSortie);
+			int choix = (int)(new Random().nextInt(nbEtatSortie));
 			Etat e = etatSortie.get(choix);
 			e.setActif(true);
 			e.setAncienEtat(etatEntree);
