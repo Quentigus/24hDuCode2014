@@ -20,17 +20,17 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-import fr.titouz.gamewatch.tools.ImageSerialisable;
+import fr.titouz.gamewatch.tools.EasyBufferedImage;
 
 public class Sprite implements Serializable {
 
 	private static final long serialVersionUID = 8449098848147438233L;
 	private Point coordonnees;
-	private ImageSerialisable image;
+	private int[][] image;
 	
 	public Sprite(Point coordonnees, BufferedImage image) {
 		this.coordonnees = coordonnees;
-		this.image = new ImageSerialisable(image);
+		this.image = EasyBufferedImage.createImage(image).getPixels2D(EasyBufferedImage.ALPHA);
 	}
 
 	public Point getCoordonnees() {
@@ -38,6 +38,6 @@ public class Sprite implements Serializable {
 	}
 
 	public BufferedImage getImage() {
-		return image.getImage();
+		return EasyBufferedImage.createImage(image);
 	}
 }
