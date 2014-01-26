@@ -14,41 +14,23 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.titouz.gamewatch.emulateur.view.common;
+package fr.titouz.gamewatch.jeu;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.IOException;
-import java.net.MalformedURLException;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import fr.titouz.gamewatch.tools.ImagesHelper;
-
-public class ImagePanel extends JPanel{
-
-	private String url;
-	private Image img;
+/**
+ * Enumération pour les opérateurs logiques binaires.
+ */
+public enum OperateurLogiqueBinaire {
+	ET, OU;
 	
-	public ImagePanel (String url) {
-		this.url = url;
-		this.setPreferredSize(new Dimension(100,100));
-	}
-	
-	public void paint(Graphics g) {
-		super.paintComponents(g);
-		try {
-			this.img = ImagesHelper.getImage(this.url);
-			if(this.img != null) {
-				g.drawImage(this.img,0,0,this);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	@Override
+	public String toString() {
+		switch(this) {
+			case ET:
+				return "ET";
+			case OU:
+				return "OU";
+			default:
+				return "?";
 		}
 	}
-	
-	
 }

@@ -14,41 +14,28 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.titouz.gamewatch.emulateur.view.common;
+package fr.titouz.gamewatch.modeleur.modele;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+public class Sprite implements Serializable {
 
-import fr.titouz.gamewatch.tools.ImagesHelper;
-
-public class ImagePanel extends JPanel{
-
-	private String url;
-	private Image img;
+	private static final long serialVersionUID = 8449098848147438233L;
+	private Point coordonnees;
+	private BufferedImage image;
 	
-	public ImagePanel (String url) {
-		this.url = url;
-		this.setPreferredSize(new Dimension(100,100));
+	public Sprite(Point coordonnees, BufferedImage image) {
+		this.coordonnees = coordonnees;
+		this.image = image;
 	}
-	
-	public void paint(Graphics g) {
-		super.paintComponents(g);
-		try {
-			this.img = ImagesHelper.getImage(this.url);
-			if(this.img != null) {
-				g.drawImage(this.img,0,0,this);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	public Point getCoordonnees() {
+		return coordonnees;
 	}
-	
-	
+
+	public BufferedImage getImage() {
+		return image;
+	}
 }

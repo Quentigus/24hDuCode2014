@@ -1,12 +1,11 @@
 package fr.titouz.gamewatch.modeleur.vues;
 
-import fr.titouz.gamewatch.modeleur.vues.composants.fond.DecoupeurFond;
-import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
+import fr.titouz.gamewatch.modeleur.vues.composants.ChargerFond;
+import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurFond;
 import javax.swing.JFrame;
 
 import fr.titouz.gamewatch.modeleur.vues.composants.DecoupeurSprites;
-import fr.titouz.gamewatch.modeleur.vues.composants.fond.DecoupeurFond;
-import fr.titouz.gamewatch.modeleur.vues.composants.sprites.PositionnementSprite;
+import fr.titouz.gamewatch.modeleur.vues.composants.PositionnementSprite;
 import fr.titouz.gamewatch.tools.ImagesHelper;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -43,6 +42,16 @@ public class FenetrePrincipale extends JFrame {
 		try {
 			
 			this.mapEtapes = new LinkedHashMap<>();
+			
+			mapEtapes.put(new DecoupeurSprites(),"1");
+		mapEtapes.put(new ChargerFond(),"2.1");
+		mapEtapes.put(new DecoupeurFond(),"2.2");
+		mapEtapes.put(new PositionnementSprite(),"3");
+		mapEtapes.put(new PositionnementSprite(),"4");
+		mapEtapes.put(new PositionnementSprite(),"5");
+		mapEtapes.put(new JPanel(),"6");
+		mapEtapes.put(new JPanel(),"7");
+			
 			
 			mapEtapes.put(new JPanel(), "test1");
 			mapEtapes.put(new JPanel(), "test2");
