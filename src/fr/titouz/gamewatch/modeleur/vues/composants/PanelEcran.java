@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
 
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
+
 public class PanelEcran extends JPanel {
 
 	private static final long serialVersionUID = 7006609470013501649L;
@@ -12,7 +14,7 @@ public class PanelEcran extends JPanel {
 	
 	public PanelEcran(MouseAdapter pListener) {
 		this.ecran = new PanelImage();
-		//this.ecran.setImage(Jeu.getInstance().getFond());
+		this.ecran.setImage(Jeu.getInstance().getFond());
 		this.ecran.setPreferredSize(new Dimension(600, 350));
 		
 		this.add(ecran);
