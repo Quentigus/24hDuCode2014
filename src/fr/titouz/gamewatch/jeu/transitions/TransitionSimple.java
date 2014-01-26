@@ -38,6 +38,7 @@ public class TransitionSimple extends Transition{
 		this.sequence.getEtatsCourants().remove(etatEntree);
 		for(Etat e: this.etatSortie) {
 			e.setActif(true);
+			e.setAncienEtat(etatEntree);
 			this.sequence.getEtatsCourants().add(e);
 		}
 	}
