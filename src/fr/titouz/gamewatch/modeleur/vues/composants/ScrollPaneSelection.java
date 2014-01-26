@@ -1,21 +1,17 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
-import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import fr.titouz.gamewatch.modeleur.modele.Jeu;
 
 /**
  *
@@ -98,6 +94,10 @@ public class ScrollPaneSelection extends JScrollPane {
 		System.out.println("relache");
 		BufferedImage sub = pan.getSubImage();
 		if(sub != null){
+			// Ajout de l'image dans le modele
+			Jeu.getInstance().ajouterSpriteDecoupe(sub);
+			
+			// Gestion du graphique
 			this.repaint();
 			this.panelSprites.add(new BoutonSprite(sub));
 			this.panelSprites.revalidate();

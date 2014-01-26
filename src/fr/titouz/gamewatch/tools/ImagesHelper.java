@@ -44,7 +44,7 @@ public final class ImagesHelper {
 	 * @return l'icône
 	 */
 	public static Icon getIcon(String name) throws MalformedURLException {
-		URL url = new File("ressources" + File.separator + "images" + File.separator + name).toURI().toURL();
+		URL url = new File(name).toURI().toURL();
 		if (url != null) {
 			return new ImageIcon(url);
 		}
