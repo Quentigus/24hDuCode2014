@@ -19,12 +19,15 @@ package fr.titouz.gamewatch.emulateur.view.game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.JPanel;
 
 import fr.titouz.gamewatch.emulateur.controller.MainController;
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
+import fr.titouz.gamewatch.modeleur.modele.Sprite;
 import fr.titouz.gamewatch.tools.ImagesHelper;
 
 public class GamePanel extends JPanel{
@@ -64,6 +67,14 @@ public class GamePanel extends JPanel{
 			Jeu j = MainController.getInstance().getJeu();
 			if(j.getFond() != null) {
 				g.drawImage(j.getFond(),0,0,this);
+			}
+			System.out.println(j.getLesSpritesDecoupes().size());
+			int n = 0;
+			for(BufferedImage bi : j.getLesSpritesDecoupes()) {
+				j.ajouterPersonnage(new Sprite(new Point((int)(Math.random()*600),(int)(Math.random()*350)), bi));
+			}
+			for(Sprite s: j.getLesPersonnages()) {
+				g.drawImage(s.getImage(), s.getCoordonnees().x, s.getCoordonnees().y, this);
 			}
 		}
 	}
