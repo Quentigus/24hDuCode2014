@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -23,11 +23,28 @@ import fr.titouz.gamewatch.jeu.Transition;
 
 /**
  * Transition s'activant sans condition.
+ * Note : cette transition n'a pas besoin de connaître le contexte du jeu.
  */
-
 public class TransitionSimple extends Transition{
 	private static final long serialVersionUID = -8897353268886690699L;
 
+	/**
+	 * Crée une transition simple ne connaissant pas le contexte du jeu.
+	 * 
+	 * @param s la séquence contenant cette transition
+	 * @param entree l'état en entrée de la transition
+	 */
+	public TransitionSimple(Sequence s, Etat entree) {
+		super(null, s, entree);
+	}
+	
+	/**
+	 * Crée une transition simple.
+	 * 
+	 * @param context le contexte du jeu
+	 * @param s la séquence contenant cette transition.
+	 * @param entree l'état en entrée de la transition.
+	 */
 	public TransitionSimple(ContextJeu context, Sequence s, Etat entree) {
 		super(context, s, entree);
 	}
