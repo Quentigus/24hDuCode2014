@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, GaÃ«l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -19,10 +19,11 @@ package fr.titouz.gamewatch.jeu.transitions;
 import fr.titouz.gamewatch.jeu.ContextJeu;
 import fr.titouz.gamewatch.jeu.Etat;
 import fr.titouz.gamewatch.jeu.Sequence;
+import fr.titouz.gamewatch.jeu.Touche;
 import fr.titouz.gamewatch.jeu.Transition;
 
 /**
- * Transition s'activant si la touche droite est activée.
+ * Transition s'activant si la touche droite est activÃ©e.
  */
 public class TransitionToucheDroite extends Transition {
 
@@ -34,7 +35,7 @@ public class TransitionToucheDroite extends Transition {
 	
 	@Override
 	public void suivant() {
-		if(this.contextDuJeu.getEtatsTouches().get("droite")) {
+		if(this.contextDuJeu.getEtatsTouches().get(Touche.DROITE)) {
 			this.etatEntree.setActif(false);
 			this.sequence.getEtatsCourants().remove(etatEntree);
 			for(Etat e: this.etatSortie) {
