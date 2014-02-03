@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -51,22 +51,42 @@ public class MainFrame extends JFrame{
 		//event
 		this.addKeyListener(new KeyAdapter() {
 			@Override
+			public void keyReleased(KeyEvent e) {
+				System.out.println(e.getKeyChar());
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_RIGHT:
+					ControlController.getInstance().rightControlRelease();
+					break;
+				case KeyEvent.VK_UP:
+					ControlController.getInstance().upControlRelease();
+					break;
+				case KeyEvent.VK_LEFT:
+					ControlController.getInstance().leftControlRelease();
+					break;
+				case KeyEvent.VK_DOWN:
+					ControlController.getInstance().downControlRelease();
+					break;
+				default:
+					break;
+				}
+			}
+			
+			@Override
 			public void keyPressed(KeyEvent e) {
 				System.out.println(e.getKeyChar());
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_RIGHT:
-					ControlController.getInstance().rightControl();
+					ControlController.getInstance().rightControlPress();
 					break;
 				case KeyEvent.VK_UP:
-					ControlController.getInstance().upControl();
+					ControlController.getInstance().upControlPress();
 					break;
 				case KeyEvent.VK_LEFT:
-					ControlController.getInstance().leftControl();
+					ControlController.getInstance().leftControlPress();
 					break;
 				case KeyEvent.VK_DOWN:
-					ControlController.getInstance().downControl();
+					ControlController.getInstance().downControlPress();
 					break;
-
 				default:
 					break;
 				}

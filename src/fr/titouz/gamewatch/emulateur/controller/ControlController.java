@@ -27,6 +27,7 @@ import fr.titouz.gamewatch.emulateur.view.MainPanel;
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.game.GamePanel;
 import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
+import fr.titouz.gamewatch.jeu.Touche;
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.tools.Repertoire;
 
@@ -84,27 +85,59 @@ public class ControlController {
 		
 	}
 
-	public void rightControl() {
+	public void rightControlPress() {
 		if(MainController.getInstance().isGameOn()) {
-			System.out.println("right");
-		}
-	}
-	
-	public void leftControl() {
-		if(MainController.getInstance().isGameOn()) {
-			System.out.println("left");
+			System.out.println("right down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.DROITE, true);
 		}
 	}
 
-	public void upControl() {
+	public void rightControlRelease() {
 		if(MainController.getInstance().isGameOn()) {
-			System.out.println("up");
+			System.out.println("right up");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.DROITE, false);
 		}
 	}
 	
-	public void downControl() {
+	public void leftControlPress() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("left down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.GAUCHE, true);
+		}
+	}
+
+	public void leftControlRelease() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("left up");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.GAUCHE, false);
+		}
+	}
+
+	public void upControlPress() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("up down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.HAUT, true);
+		}
+	}
+
+	public void upControlRelease() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("up up");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.HAUT, false);
+		}
+	}
+	
+	public void downControlPress() {
 		if(MainController.getInstance().isGameOn()) {
 			System.out.println("down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.BAS, true);
+		}
+	}
+
+	public void downControlRelease() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.BAS, false);
 		}
 	}
 }
