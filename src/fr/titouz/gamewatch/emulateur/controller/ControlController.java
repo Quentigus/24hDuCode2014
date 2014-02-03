@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -54,12 +54,13 @@ public class ControlController {
 
 	public void enterListControl(String selectedValue) {
 		if(selectedValue != null && !MainController.getInstance().isGameOn()) {
-			String url = "C:\\titzwatch\\"+selectedValue.replaceAll(" ", "_")+".titz";
+			String url = "C:\\titzwatch" + File.separator + selectedValue.replaceAll(" ", "_")+".titz";
 			
-			MainController.getInstance().launchGame(chargerJeu(url));
-			CenterPanel.getInstance().changerEcranToGame();
-			MainPanel.getInstance().repaint();
-			GamePanel.getInstance().jouerBasicJeu();
+			MainController.getInstance().launchGame(chargerJeu(url));// TODO Revoir nom de launchGame (ne lance pas le jeu -> comportement ok : on le jeu est identifié à ce moment)
+			CenterPanel.getInstance().changerEcranToGame();//Charge l'écran de jeu
+			MainPanel.getInstance().repaint();//TODO Note: Le jeu peut être lancer après ça
+			//GamePanel.getInstance().jouerBasicJeu();
+			GamePanel.getInstance().jouerJeu();
 		}
 		
 	}

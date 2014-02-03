@@ -138,7 +138,7 @@ public class GamePanel extends JPanel{
 					try {
 						Thread.sleep(20000);
 					} catch (InterruptedException e) {
-						System.err.println("Thread attente testJouer interrompu.");
+						System.err.println("Thread attente jouerBasicJouer interrompu.");
 					}
 					jeu.stop();
 					
@@ -148,7 +148,52 @@ public class GamePanel extends JPanel{
 			thrd.start();
 		}
 	}
-	
+
+	public void jouerJeu() {
+		jeu = new fr.titouz.gamewatch.jeu.Jeu();
+		Jeu j = MainController.getInstance().getJeu();
+		
+		//Récupération des séquences
+		for(Sequence seq : j.getLesSequences()) {
+			jeu.getSequences().add(seq);
+		}
+		
+		//Récupération du contexte associé aux personnages
+		for(Sprite s : j.getLesPersonnages()) {
+			if(s.hasEtat()) {
+				jeu.setContext(s.getEtat().get(0).getContextDuJeu());
+				break;
+			}
+		}
+			
+		TourDeJeuListener listener = new TourDeJeuListener() {
+			@Override
+			public void notifier() {
+				GamePanel.getInstance().repaint();
+				GamePanel.getInstance().validate();
+			}
+		};
+		
+		jeu.addTourDeJeuListener(listener);
+		listener.notifier();
+		jeu.jouer();
+		Thread thrd = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					System.err.println("Thread attente jouerJeu interrompu.");
+				}
+				jeu.stop();
+				
+			}
+			
+		});
+		thrd.start();
+	}
+
 	public static class TabAffListener implements TourDeJeuListener {
 		public Etat[] e;
 		

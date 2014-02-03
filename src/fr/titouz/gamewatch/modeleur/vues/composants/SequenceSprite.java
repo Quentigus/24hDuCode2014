@@ -1,6 +1,12 @@
 package fr.titouz.gamewatch.modeleur.vues.composants;
 
-import fr.titouz.gamewatch.modeleur.modele.GTransition;
+import fr.titouz.gamewatch.jeu.ContextJeu;
+import fr.titouz.gamewatch.jeu.Etat;
+import fr.titouz.gamewatch.jeu.Sequence;
+import fr.titouz.gamewatch.jeu.Transition;
+import fr.titouz.gamewatch.jeu.transitions.TransitionSimple;
+import fr.titouz.gamewatch.jeu.transitions.TransitionToucheDroite;
+import fr.titouz.gamewatch.jeu.transitions.TransitionToucheGauche;
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.modeleur.modele.Sprite;
 import java.awt.Graphics;
@@ -25,9 +31,15 @@ public class SequenceSprite extends JPanel {
 	
 	private int typeSprites;
 	
-	private Sprite spriteEnCours = null;
+	private Sprite spriteEnCours;
+	
+	private Sprite spriteSource;
 
-	private Sprite spriteDestination = null;
+	private Sprite spriteDestination;
+	
+	private Sequence sequenceCourante;
+	
+	private ContextJeu contextJeu;//TODO Ceci est un patch en attendant la gestion du contexte de jeu.
 
 	/**
 	 * Default constructor of
@@ -35,6 +47,8 @@ public class SequenceSprite extends JPanel {
 	 */
 	public SequenceSprite(int typeSprites) {
 		this.typeSprites = typeSprites;
+		this.sequenceCourante = new Sequence();//TODO Ceci est un patch en attentant la possibilité de créer ses propres séquences
+		this.contextJeu = new ContextJeu();//TODO Ceci est un patch en attendant la gestion du contexte de jeu.
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -43,12 +57,14 @@ public class SequenceSprite extends JPanel {
 			}
 		});
 		
+		Jeu.getInstance().ajouterSequence(sequenceCourante);
 		
 	}
 	
 	public void sourisRelachee(MouseEvent e) {
 		if (spriteEnCours == null) {
 			spriteEnCours = getClickedSprite(e.getPoint());
+			spriteSource = spriteEnCours;
 			System.out.println("Res : " + spriteEnCours);
 		}
 		else {
@@ -76,13 +92,11 @@ public class SequenceSprite extends JPanel {
 					menu.addPopupMenuListener(new PopupMenuListener() {
 						@Override
 						public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-							
 						}
 						
 						@Override
 						public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 							spriteEnCours = null;
-							spriteDestination = null;
 						}
 						
 						@Override
@@ -94,13 +108,42 @@ public class SequenceSprite extends JPanel {
 					menu.show(this, (int) e.getPoint().getX(), (int) e.getPoint().getY());
 					
 				}
-				else {
-					Jeu.getInstance().ajouterSequence(new GTransition(spriteEnCours, spriteDestination, "auto"));
+				else {// Transition automatique d'un sprite à l'autre
+					System.out.println("Création d'une transition automatique");
+					
+					/* Association du sprite de début de transition à un état
+					 * s'il n'en avait pas.
+					 */
+					if(!spriteSource.hasEtat()) {
+						spriteSource.setEtat(new Etat());
+					}
+					
+					/* Association du sprite de fin de transition à un état
+					 * s'il n'en avait pas.
+					 */
+					if(!spriteDestination.hasEtat()) {
+						spriteDestination.setEtat(new Etat());
+					}
+					
+					// Ajout de l'état initial de la séquence courante si elle est vide
+					if(sequenceCourante.getEtatInitial() == null) {
+						sequenceCourante.setEtatInitial(spriteSource.getEtat());
+						//Initialisation de la séquence
+						sequenceCourante.getEtatInitial().setActif(true);
+						sequenceCourante.getEtatsCourants().add(sequenceCourante.getEtatInitial());
+					}
+					// Traitement du cas de transition classique
+					if(spriteSource != spriteDestination) {
+						//Création de la nouvelle transition
+						Transition trans = new TransitionSimple(sequenceCourante, spriteSource.getEtat());
+						trans.getEtatSortie().add(spriteDestination.getEtat());
+					}
+					else {// Traitement du cas de transition sur le même sprite
+						// TODO définir le comportement : exception ou inversion de visibilité ?
+					}
 				}
-				
-				
-				spriteEnCours = null;
 			}
+			spriteEnCours = null;
 		}
 	}
 	
@@ -124,7 +167,6 @@ public class SequenceSprite extends JPanel {
 	}
 	
 	public Sprite getClickedSprite(Point pt) {
-		Sprite sp = null;
 		if (typeSprites == 1) {
 			for (Sprite s : Jeu.getInstance().getLesPersonnages()) {
 				Rectangle r = new Rectangle((int) s.getCoordonnees().getX(), (int) s.getCoordonnees().getY(), s.getImage().getWidth(), s.getImage().getHeight());
@@ -141,7 +183,7 @@ public class SequenceSprite extends JPanel {
 			for (Sprite s : Jeu.getInstance().getLesEnnemies()) {
 				Rectangle r = new Rectangle((int) s.getCoordonnees().getX(), (int) s.getCoordonnees().getY(), s.getImage().getWidth(), s.getImage().getHeight());
 				if (r.contains(pt)) {
-					return sp;
+					return s;
 				}
 			}
 		}
@@ -149,12 +191,70 @@ public class SequenceSprite extends JPanel {
 	}
 	
 	public void actionPopUpGauche() {
-		Jeu.getInstance().ajouterSequence(new GTransition(spriteEnCours, spriteDestination, "gauche"));
+		System.out.println("Création d'une transition sur la touche gauche");
+		/* Association du sprite de début de transition à un état
+		 * s'il n'en avait pas.
+		 */
+		if(!spriteSource.hasEtat()) {
+			spriteSource.setEtat(new Etat());
+		}
 		
+		/* Association du sprite de fin de transition à un état
+		 * s'il n'en avait pas.
+		 */
+		if(!spriteDestination.hasEtat()) {
+			spriteDestination.setEtat(new Etat());
+		}
+		
+		// Ajout de l'état initial de la séquence courante si elle est vide
+		if(sequenceCourante.getEtatInitial() == null) {
+			sequenceCourante.setEtatInitial(spriteSource.getEtat());
+			//Initialisation de la séquence
+			sequenceCourante.getEtatInitial().setActif(true);
+			sequenceCourante.getEtatsCourants().add(sequenceCourante.getEtatInitial());
+		}
+		// Traitement du cas de transition classique
+		if(spriteSource != spriteDestination) {
+			//Création de la nouvelle transition
+			Transition trans = new TransitionToucheGauche(contextJeu, sequenceCourante, spriteSource.getEtat());
+			trans.getEtatSortie().add(spriteDestination.getEtat());
+		}
+		else {// Traitement du cas de transition sur le même sprite
+			// TODO définir le comportement : exception ou inversion de visibilité ?
+		}
 	}
 	
 	public void actionPopUpDroit() {
+		System.out.println("Création d'une transition sur la touche droite");
+		/* Association du sprite de début de transition à un état
+		 * s'il n'en avait pas.
+		 */
+		if(!spriteSource.hasEtat()) {
+			spriteSource.setEtat(new Etat());
+		}
 		
-		Jeu.getInstance().ajouterSequence(new GTransition(spriteEnCours, spriteDestination, "droite"));
+		/* Association du sprite de fin de transition à un état
+		 * s'il n'en avait pas.
+		 */
+		if(!spriteDestination.hasEtat()) {
+			spriteDestination.setEtat(new Etat());
+		}
+		
+		// Ajout de l'état initial de la séquence courante si elle est vide
+		if(sequenceCourante.getEtatInitial() == null) {
+			sequenceCourante.setEtatInitial(spriteSource.getEtat());
+			//Initialisation de la séquence
+			sequenceCourante.getEtatInitial().setActif(true);
+			sequenceCourante.getEtatsCourants().add(sequenceCourante.getEtatInitial());
+		}
+		// Traitement du cas de transition classique
+		if(spriteSource != spriteDestination) {
+			//Création de la nouvelle transition
+			Transition trans = new TransitionToucheDroite(contextJeu, sequenceCourante, spriteSource.getEtat());
+			trans.getEtatSortie().add(spriteDestination.getEtat());
+		}
+		else {// Traitement du cas de transition sur le même sprite
+			// TODO définir le comportement : exception ou inversion de visibilité ?
+		}
 	}
 }

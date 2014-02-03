@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Cette classe représente un game & watch.
+ * Cette classe reprï¿½sente un game & watch.
  */
 public class Jeu {
 	private List<Sequence> sequences;
@@ -33,7 +33,7 @@ public class Jeu {
 	private Condition gagneCondition;
 	
 	/**
-	 * Crée un jeu.
+	 * Crï¿½e un jeu.
 	 */
 	public Jeu() {
 		context = new ContextJeu();
@@ -52,6 +52,10 @@ public class Jeu {
 		return context;
 	}
 	
+	public void setContext(ContextJeu c) {
+		context = c;
+	}
+	
 	public void setEchecCondition(Condition echecCondition) {
 		this.echecCondition = echecCondition;
 	}
@@ -61,18 +65,18 @@ public class Jeu {
 	}
 
 	/**
-	 * Ajoute un écouteur de tour de jeu.
+	 * Ajoute un ï¿½couteur de tour de jeu.
 	 * 
-	 * @param l l'écouteur de tour de jeu.
+	 * @param l l'ï¿½couteur de tour de jeu.
 	 */
 	public void addTourDeJeuListener(TourDeJeuListener l) {
 		ecouteurs.add(l);
 	}
 	
 	/**
-	 * Retire un écouteur de tour de jeu.
+	 * Retire un ï¿½couteur de tour de jeu.
 	 * 
-	 * @param l l'écouteur à retirer.
+	 * @param l l'ï¿½couteur ï¿½ retirer.
 	 */
 	public void removeTourDeJeuListener(TourDeJeuListener l) {
 		ecouteurs.remove(l);
@@ -141,7 +145,7 @@ public class Jeu {
 	/**
 	 * Test si le jeu est en gagne.
 	 * 
-	 * @return true si la condition de succès est remplie. Si pas de condition retourne false.
+	 * @return true si la condition de succï¿½s est remplie. Si pas de condition retourne false.
 	 */
 	public boolean isGagne() {
 		if(gagneCondition == null)
@@ -150,9 +154,9 @@ public class Jeu {
 	}
 	
 	/**
-	 * Test si le jeu est en échec.
+	 * Test si le jeu est en ï¿½chec.
 	 * 
-	 * @return true si la condition d'échec est remplie. Si pas de condition retourne false.
+	 * @return true si la condition d'ï¿½chec est remplie. Si pas de condition retourne false.
 	 */
 	public boolean isEchec() {
 		if(echecCondition == null)

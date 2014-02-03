@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -18,6 +18,10 @@ package fr.titouz.gamewatch.modeleur.modele;
 
 import java.io.Serializable;
 
+/**
+ * Cette classe représente graphiquement une transition.
+ * TODO A déplacer dans le package des vues. Revoir sa conception.
+ */
 public class GTransition implements Serializable {
 
 	private static final long serialVersionUID = 5596002822836246892L;
