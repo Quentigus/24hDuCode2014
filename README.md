@@ -5,6 +5,6 @@ Ce projet est composé d'un émulateur et d'un éditeur de jeux de type game & w
 Il a été initialement développé en 24h au cours des 24h du code du Mans de 2014.
 Le résultat à la fin du challenge est tagué "Fin_24h".
 
-License
+Licence
 =======
-Le projet est sous license GPL v3. Libre à vous d'en télécarger sources et de le distribué. ;)
+Le projet est sous licence GPL v3. Libre à vous d'en télécarger sources et de le distribuer. ;)
