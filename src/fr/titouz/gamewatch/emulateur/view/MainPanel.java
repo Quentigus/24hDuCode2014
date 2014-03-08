@@ -1,5 +1,5 @@
 
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -57,9 +57,9 @@ public class MainPanel extends JPanel{
 		this.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		this.setLayout(new BorderLayout(5, 5));
-		this.add(RightBarPanel.getInstance().init(),BorderLayout.WEST);
+		this.add(LeftBarPanel.getInstance().init(), BorderLayout.WEST);
 		this.add(CenterPanel.getInstance().init(),BorderLayout.CENTER);
-		this.add(LeftBarPanel.getInstance().init(), BorderLayout.EAST);
+		this.add(RightBarPanel.getInstance().init(),BorderLayout.EAST);
 		
 		return this;
 	}

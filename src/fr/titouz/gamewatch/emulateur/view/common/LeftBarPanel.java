@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -18,8 +18,13 @@ package fr.titouz.gamewatch.emulateur.view.common;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
+
+import fr.titouz.gamewatch.emulateur.controller.ControlController;
+import fr.titouz.gamewatch.emulateur.controller.MainController;
 
 public class LeftBarPanel extends JPanel{
 	
@@ -40,7 +45,26 @@ public class LeftBarPanel extends JPanel{
 			this.setOpaque(false);
 			this.setPreferredSize(new Dimension(100,500));
 			this.setLayout(new BorderLayout());
-			this.add(new ImagePanel("ressources/flecheDroite.png"), BorderLayout.SOUTH);
+			ImagePanel imPan = new ImagePanel("ressources/flecheGauche.png");
+			this.add(imPan, BorderLayout.SOUTH);
+			imPan.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					if(MainController.getInstance().isGameOn()) {
+						System.out.println("clic gauche");
+						ControlController.getInstance().leftControlPress();
+					}
+				}
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					if(MainController.getInstance().isGameOn()) {
+						System.out.println("clic gauche");
+						ControlController.getInstance().leftControlRelease();
+					}
+				}
+			});
 			
 		} catch (Exception e) {
 			e.printStackTrace();

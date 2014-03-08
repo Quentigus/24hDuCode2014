@@ -23,6 +23,9 @@ import java.io.Serializable;
 import fr.titouz.gamewatch.jeu.Etat;
 import fr.titouz.gamewatch.tools.ImageSerialisable2;
 
+/**
+ * Cette classe représente une image du jeu dont l'état peut varier.
+ */
 public class Sprite implements Serializable {
 
 	private static final long serialVersionUID = 8449098848147438233L;
@@ -45,9 +48,9 @@ public class Sprite implements Serializable {
 	}
 	
 	/**
-	 * Indique si le sprite doit �tre affich�.
+	 * Indique si le sprite doit �tre affich�. Cela dépend de son état.
 	 * 
-	 * @return true si le sprite doit �tre affich�, sinon false.
+	 * @return true si le sprite doit �tre affich�, sinon false.
 	 */
 	public boolean isVisible() {
 		if(this.etat == null) {
@@ -56,6 +59,15 @@ public class Sprite implements Serializable {
 		return etat.isActif();
 	}
 
+	/**
+	 * Test si le sprite est associé à un état.
+	 * 
+	 * @return <code>true</code> si le sprite est associé à un état, <code>false</code> dans le cas contraire.
+	 */
+	public boolean hasEtat() {
+		return etat != null;
+	}
+	
 	public Etat getEtat() {
 		return etat;
 	}

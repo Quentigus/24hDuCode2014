@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, GaÃ«l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -21,27 +21,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Cette classe contient l'état des éléments généraux d'un jeu.
+ * Cette classe contient l'Ã©tat des Ã©lÃ©ments gÃ©nÃ©raux d'un jeu.
  */
 public class ContextJeu implements Serializable {
 	private static final long serialVersionUID = 7979879589240342453L;
-	private Map<String, Boolean> etatsTouches;
+	private Map<Touche, Boolean> etatsTouches;
 	
 	public ContextJeu() {
-		etatsTouches = new HashMap<String, Boolean>();
-		initTouchMap();
+		etatsTouches = new HashMap<Touche, Boolean>();
+		initToucheMap();
 	}
 	
-	private void initTouchMap() {
-		etatsTouches.put("droite", false);
-		etatsTouches.put("gauche", false);
+	private void initToucheMap() {
+		etatsTouches.put(Touche.DROITE, false);
+		etatsTouches.put(Touche.GAUCHE, false);
 	}
 
-	public Map<String, Boolean> getEtatsTouches() {
+	public Map<Touche, Boolean> getEtatsTouches() {
 		return etatsTouches;
 	}
 
-	public void setEtatsTouches(Map<String, Boolean> etatsTouches) {
+	public void setEtatsTouches(Map<Touche, Boolean> etatsTouches) {
 		this.etatsTouches = etatsTouches;
 	}
 }

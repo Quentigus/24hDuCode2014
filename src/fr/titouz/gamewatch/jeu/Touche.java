@@ -14,12 +14,25 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.titouz.gamewatch.modeleur;
+package fr.titouz.gamewatch.jeu;
 
-import fr.titouz.gamewatch.modeleur.vues.FenetrePrincipale;
-
-public class LauncherModeleur {
-	public static void main(String args[]){
-		new FenetrePrincipale();
+/**
+ * Énumération des touches disponibles pour les jeux.
+ */
+public enum Touche {
+	DROITE, GAUCHE, HAUT, BAS;
+	
+	@Override
+	public String toString() {
+		switch(this) {
+			case DROITE:
+				return "droite";
+			case GAUCHE:
+				return "gauche";
+			case HAUT:
+				return "haut";
+			default:
+				return "bas";
+		}
 	}
 }

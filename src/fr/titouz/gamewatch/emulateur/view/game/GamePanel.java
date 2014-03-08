@@ -19,14 +19,12 @@ package fr.titouz.gamewatch.emulateur.view.game;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JPanel;
 
 import fr.titouz.gamewatch.emulateur.controller.MainController;
+import fr.titouz.gamewatch.jeu.ContextJeu;
 import fr.titouz.gamewatch.jeu.Etat;
 import fr.titouz.gamewatch.jeu.Sequence;
 import fr.titouz.gamewatch.jeu.TourDeJeuListener;
@@ -35,7 +33,6 @@ import fr.titouz.gamewatch.jeu.transitions.TransitionAleatoire;
 import fr.titouz.gamewatch.jeu.transitions.TransitionSimple;
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.modeleur.modele.Sprite;
-import fr.titouz.gamewatch.tools.ImagesHelper;
 
 public class GamePanel extends JPanel{
 
@@ -63,10 +60,11 @@ public class GamePanel extends JPanel{
 			this.setBackground(Color.black);
 		}
 		
-		
-		
-		
 		return this;
+	}
+	
+	public ContextJeu getContextJeu() {
+		return jeu.getContext();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -138,7 +136,7 @@ public class GamePanel extends JPanel{
 					try {
 						Thread.sleep(20000);
 					} catch (InterruptedException e) {
-						System.err.println("Thread attente testJouer interrompu.");
+						System.err.println("Thread attente jouerBasicJouer interrompu.");
 					}
 					jeu.stop();
 					
@@ -148,7 +146,52 @@ public class GamePanel extends JPanel{
 			thrd.start();
 		}
 	}
-	
+
+	public void jouerJeu() {
+		jeu = new fr.titouz.gamewatch.jeu.Jeu();
+		Jeu j = MainController.getInstance().getJeu();
+		
+		//Récupération des séquences
+		for(Sequence seq : j.getLesSequences()) {
+			jeu.getSequences().add(seq);
+		}
+		
+		//Récupération du contexte associé aux personnages
+		for(Sprite s : j.getLesPersonnages()) {
+			if(s.hasEtat()) {
+				jeu.setContext(s.getEtat().get(0).getContextDuJeu());
+				break;
+			}
+		}
+			
+		TourDeJeuListener listener = new TourDeJeuListener() {
+			@Override
+			public void notifier() {
+				GamePanel.getInstance().repaint();
+				GamePanel.getInstance().validate();
+			}
+		};
+		
+		jeu.addTourDeJeuListener(listener);
+		listener.notifier();
+		jeu.jouer();
+		Thread thrd = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(20000);
+				} catch (InterruptedException e) {
+					System.err.println("Thread attente jouerJeu interrompu.");
+				}
+				jeu.stop();
+				
+			}
+			
+		});
+		thrd.start();
+	}
+
 	public static class TabAffListener implements TourDeJeuListener {
 		public Etat[] e;
 		

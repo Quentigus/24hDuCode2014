@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Gaël DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Gaï¿½l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -27,18 +27,25 @@ public class Sequence implements Serializable {
 	private List<Etat> etatsCourants;
 	
 	/**
-	 * Crée une séquence. L'état initial est automatiquement ajouté aux états courants.
+	 * CrÃ©e une sÃ©quence vide.
+	 */
+	public Sequence() {
+		this(null, false);
+	}
+	
+	/**
+	 * CrÃ©e une sÃ©quence. L'Ã©tat initial est automatiquement ajoutÃ© aux Ã©tats courants.
 	 * 
-	 * @param init état initial de la séquence.
+	 * @param init Ã©tat initial de la sÃ©quence.
 	 */
 	public Sequence(Etat init) {
 		this(init, true);
 	}
 	/**
-	 * Crée une séquence.
+	 * CrÃ©e une sÃ©quence.
 	 * 
-	 * @param init état initial de la séquence.
-	 * @param addToEtatCourant true pour ajouter automatiquement l'état initial aux etats courant.
+	 * @param init Ã©tat initial de la sÃ©quence.
+	 * @param addToEtatCourant true pour ajouter automatiquement l'Ã©tat initial aux etats courant.
 	 */
 	public Sequence(Etat init, boolean addToEtatCourant) {
 		super();
@@ -61,7 +68,7 @@ public class Sequence implements Serializable {
 	}
 	
 	/**
-	 * Active toutes les transitions des états courant.
+	 * Active toutes les transitions des Ã©tats courant.
 	 */
 	public void suivant() {
 		List<Etat> copie = new LinkedList<Etat>(etatsCourants);

@@ -1,4 +1,4 @@
-/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
+/*Copyright ANDRU Bastien, CARRE, Ga�l DUROY Adrien, GOSSELIN Quentin, JARROT Kathleen
  * (25/01/2014)
  * This file is part of Titz & Watch.
  * 
@@ -27,19 +27,13 @@ import fr.titouz.gamewatch.emulateur.view.MainPanel;
 import fr.titouz.gamewatch.emulateur.view.common.CenterPanel;
 import fr.titouz.gamewatch.emulateur.view.game.GamePanel;
 import fr.titouz.gamewatch.emulateur.view.game.GameTitlePanel;
-import fr.titouz.gamewatch.jeu.Etat;
-import fr.titouz.gamewatch.jeu.Sequence;
-import fr.titouz.gamewatch.jeu.TourDeJeuListener;
-import fr.titouz.gamewatch.jeu.Transition;
-import fr.titouz.gamewatch.jeu.transitions.TransitionToucheGauche;
-import fr.titouz.gamewatch.modeleur.modele.GTransition;
+import fr.titouz.gamewatch.jeu.Touche;
 import fr.titouz.gamewatch.modeleur.modele.Jeu;
 import fr.titouz.gamewatch.tools.Repertoire;
 
 public class ControlController {
 
 	private static ControlController instance;
-	private fr.titouz.gamewatch.jeu.Jeu jeu;
 
 	private ControlController() {
 	}
@@ -61,62 +55,15 @@ public class ControlController {
 
 	public void enterListControl(String selectedValue) {
 		if(selectedValue != null && !MainController.getInstance().isGameOn()) {
-			String url = "C:\\titzwatch\\"+selectedValue.replaceAll(" ", "_")+".titz";
+			String url = "C:\\titzwatch" + File.separator + selectedValue.replaceAll(" ", "_")+".titz";
 			
-			MainController.getInstance().launchGame(chargerJeu(url));
-			CenterPanel.getInstance().changerEcranToGame();
-			MainPanel.getInstance().repaint();
-			chargeEtLanceModelJeu();
+			MainController.getInstance().launchGame(chargerJeu(url));// TODO Revoir nom de launchGame (ne lance pas le jeu -> comportement ok : on le jeu est identifié à ce moment)
+			CenterPanel.getInstance().changerEcranToGame();//Charge l'écran de jeu
+			MainPanel.getInstance().repaint();//TODO Note: Le jeu peut être lancer après ça
 			//GamePanel.getInstance().jouerBasicJeu();
+			GamePanel.getInstance().jouerJeu();
 		}
 		
-	}
-	
-	private void chargeEtLanceModelJeu() {
-		Jeu j = MainController.getInstance().getJeu();
-		jeu = new fr.titouz.gamewatch.jeu.Jeu();
-		for(GTransition gt : j.getLesSequences()) {	
-			Etat init = new Etat();
-			init.setActif(true);
-			Etat fin = new Etat();
-			Sequence s = new Sequence(init);
-			jeu.getSequences().add(s);
-			
-			gt.getInitial().setEtat(init);
-			gt.getDestination().setEtat(fin);
-			if(gt.getCondition().equals("gauche")) {
-				Transition t = new TransitionToucheGauche(jeu.getContext(), s, init);
-				t.getEtatSortie().add(fin);
-			}
-		}
-		
-		TourDeJeuListener listener = new TourDeJeuListener() {
-			@Override
-			public void notifier() {
-				GamePanel.getInstance().repaint();
-				GamePanel.getInstance().validate();
-			}
-		};
-		
-		
-		jeu.addTourDeJeuListener(listener);
-		listener.notifier();
-		jeu.jouer();
-		Thread thrd = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(20000);
-				} catch (InterruptedException e) {
-					System.err.println("Thread attente testJouer interrompu.");
-				}
-				jeu.stop();
-				
-			}
-			
-		});
-		thrd.start();
 	}
 	
 	private Jeu chargerJeu(String url) {
@@ -138,27 +85,59 @@ public class ControlController {
 		
 	}
 
-	public void rightControl() {
+	public void rightControlPress() {
 		if(MainController.getInstance().isGameOn()) {
-			System.out.println("right");
-		}
-	}
-	
-	public void leftControl() {
-		if(MainController.getInstance().isGameOn()) {
-			System.out.println("left");
+			System.out.println("right down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.DROITE, true);
 		}
 	}
 
-	public void upControl() {
+	public void rightControlRelease() {
 		if(MainController.getInstance().isGameOn()) {
-			System.out.println("up");
+			System.out.println("right up");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.DROITE, false);
 		}
 	}
 	
-	public void downControl() {
+	public void leftControlPress() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("left down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.GAUCHE, true);
+		}
+	}
+
+	public void leftControlRelease() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("left up");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.GAUCHE, false);
+		}
+	}
+
+	public void upControlPress() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("up down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.HAUT, true);
+		}
+	}
+
+	public void upControlRelease() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("up up");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.HAUT, false);
+		}
+	}
+	
+	public void downControlPress() {
 		if(MainController.getInstance().isGameOn()) {
 			System.out.println("down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.BAS, true);
+		}
+	}
+
+	public void downControlRelease() {
+		if(MainController.getInstance().isGameOn()) {
+			System.out.println("down");
+			GamePanel.getInstance().getContextJeu().getEtatsTouches().put(Touche.BAS, false);
 		}
 	}
 }

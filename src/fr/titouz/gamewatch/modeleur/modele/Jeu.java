@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import fr.titouz.gamewatch.jeu.Sequence;
 import fr.titouz.gamewatch.tools.ImageSerialisable2;
 
 public class Jeu implements Serializable {
@@ -31,7 +32,7 @@ public class Jeu implements Serializable {
 	private ArrayList<Sprite> lesEnnemies;
 	private ArrayList<Sprite> lesFixes;
 	private ArrayList<Sprite> lesPersonnages;
-	private ArrayList<GTransition> lesSequences;
+	private ArrayList<Sequence> lesSequences;
 	
 	public String getNom()  {
 		return nom;
@@ -87,11 +88,11 @@ public class Jeu implements Serializable {
 		this.lesPersonnages.add(personnage);
 	}
 
-	public ArrayList<GTransition> getLesSequences() {
+	public ArrayList<Sequence> getLesSequences() {
 		return lesSequences;
 	}
 
-	public void ajouterSequence(GTransition sequence) {
+	public void ajouterSequence(Sequence sequence) {
 		this.lesSequences.add(sequence);
 	}
 
