@@ -7,4 +7,4 @@ Le résultat à la fin du challenge est tagué "Fin_24h".
 
 Licence
 =======
-Le projet est sous licence GPL v3. Libre à vous d'en télécarger sources et de le distribuer. ;)
+Le projet est sous licence GPL v3. Libre à vous d'en télécharger les sources et de le distribuer. ;)
